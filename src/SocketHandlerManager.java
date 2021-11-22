@@ -9,6 +9,7 @@ import java.net.Socket;
 
     private Socket socket;
     private UserManager userManager;
+    private RestaurantManager restaurantManager;
 
     private OutputStream outToClient;
     private InputStream inFromClient;
@@ -52,6 +53,10 @@ import java.net.Socket;
         {
           e.printStackTrace();
         }
+      }
+
+      if (request.getType().equals("AddRestaurant")){
+          restaurantManager.AddRestaurant(request.getContext());
       }
 
     }
