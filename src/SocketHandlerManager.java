@@ -60,15 +60,25 @@ import java.net.Socket;
       }
 
       if (request.getType().equals("AddRestaurant")){
-          System.out.println("I got a request" + request.getContext());
+          System.out.println("I got a request to add Restaurant" + request.getContext());
           try{
               restaurantManager.AddRestaurant(request.getContext());
           }
           catch (Exception e){
             System.out.println(e);
           }
-
       }
+
+      if (request.getType().equals("AddUser")){
+        System.out.println("I got a request to add User" + request.getContext());
+        try{
+          userManager.AddUser(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
     }
   }
 
