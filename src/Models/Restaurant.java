@@ -5,22 +5,97 @@ public class Restaurant {
     private String name;
     private String address;
     private String phoneNumber;
-    private String openingHours;
+    private String openingHoursMonday;
+    private String openingHoursTuesday;
+    private String openingHoursWednesday;
+    private String openingHoursThursday;
+    private String openingHoursFriday;
+    private String openingHoursSaturday;
+    private String openingHoursSunday;
     private String description;
+    private DeliveryOption deliveryOption1;
+    private DeliveryOption deliveryOption2;
 
-    public Restaurant(int restaurantID, String name, String address, String phoneNumber, String openingHours, String description){
-        this.restaurantID=restaurantID;
-        this.name=name;
-        this.address=address;
-        this.phoneNumber=phoneNumber;
-        this.openingHours=openingHours;
-        this.description=description;
+    public Restaurant(int restaurantID, String name, String address, String phoneNumber, String openingHoursMonday,
+                      String openingHoursTuesday, String openingHoursWednesday, String openingHoursThursday,
+                      String openingHoursFriday, String openingHoursSaturday, String openingHoursSunday,
+                      String description, DeliveryOption deliveryOption1, DeliveryOption deliveryOption2) {
+        this.restaurantID = restaurantID;
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.openingHoursMonday = openingHoursMonday;
+        this.openingHoursTuesday = openingHoursTuesday;
+        this.openingHoursWednesday = openingHoursWednesday;
+        this.openingHoursThursday = openingHoursThursday;
+        this.openingHoursFriday = openingHoursFriday;
+        this.openingHoursSaturday = openingHoursSaturday;
+        this.openingHoursSunday = openingHoursSunday;
+        this.description = description;
+        this.deliveryOption1 = deliveryOption1;
+        this.deliveryOption2 = deliveryOption2;
     }
 
-    public Restaurant(){}
+    public Restaurant(String name, String address, String phoneNumber, String openingHoursMonday,
+                      String openingHoursTuesday, String openingHoursWednesday, String openingHoursThursday,
+                      String openingHoursFriday, String openingHoursSaturday, String openingHoursSunday,
+                      String description, DeliveryOption deliveryOption1, DeliveryOption deliveryOption2) {
+        this.name = name;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.openingHoursMonday = openingHoursMonday;
+        this.openingHoursTuesday = openingHoursTuesday;
+        this.openingHoursWednesday = openingHoursWednesday;
+        this.openingHoursThursday = openingHoursThursday;
+        this.openingHoursFriday = openingHoursFriday;
+        this.openingHoursSaturday = openingHoursSaturday;
+        this.openingHoursSunday = openingHoursSunday;
+        this.description = description;
+        this.deliveryOption1 = deliveryOption1;
+        this.deliveryOption2 = deliveryOption2;
+    }
+
+    public Restaurant() {
+    }
 
     public int getRestaurantID() {
         return restaurantID;
+    }
+
+    public DeliveryOption getDeliveryOption1() {
+        return deliveryOption1;
+    }
+
+    public DeliveryOption getDeliveryOption2() {
+        return deliveryOption2;
+    }
+
+    public String getOpeningHoursMonday() {
+        return openingHoursMonday;
+    }
+
+    public String getOpeningHoursTuesday() {
+        return openingHoursTuesday;
+    }
+
+    public String getOpeningHoursWednesday() {
+        return openingHoursWednesday;
+    }
+
+    public String getOpeningHoursThursday() {
+        return openingHoursThursday;
+    }
+
+    public String getOpeningHoursFriday() {
+        return openingHoursFriday;
+    }
+
+    public String getOpeningHoursSaturday() {
+        return openingHoursSaturday;
+    }
+
+    public String getOpeningHoursSunday() {
+        return openingHoursSunday;
     }
 
     public String getAddress() {
@@ -33,10 +108,6 @@ public class Restaurant {
 
     public String getName() {
         return name;
-    }
-
-    public String getOpeningHours() {
-        return openingHours;
     }
 
     public String getPhoneNumber() {
@@ -59,12 +130,44 @@ public class Restaurant {
         this.restaurantID = restaurantID;
     }
 
-    public void setOpeningHours(String openingHours) {
-        this.openingHours = openingHours;
-    }
-
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setDeliveryOption1(DeliveryOption deliveryOption1) {
+        this.deliveryOption1 = deliveryOption1;
+    }
+
+    public void setDeliveryOption2(DeliveryOption deliveryOption2) {
+        this.deliveryOption2 = deliveryOption2;
+    }
+
+    public void setOpeningHoursMonday(String openingHoursMonday) {
+        this.openingHoursMonday = openingHoursMonday;
+    }
+
+    public void setOpeningHoursTuesday(String openingHoursTuesday) {
+        this.openingHoursTuesday = openingHoursTuesday;
+    }
+
+    public void setOpeningHoursWednesday(String openingHoursWednesday) {
+        this.openingHoursWednesday = openingHoursWednesday;
+    }
+
+    public void setOpeningHoursThursday(String openingHoursThursday) {
+        this.openingHoursThursday = openingHoursThursday;
+    }
+
+    public void setOpeningHoursFriday(String openingHoursFriday) {
+        this.openingHoursFriday = openingHoursFriday;
+    }
+
+    public void setOpeningHoursSaturday(String openingHoursSaturday) {
+        this.openingHoursSaturday = openingHoursSaturday;
+    }
+
+    public void setOpeningHoursSunday(String openingHoursSunday) {
+        this.openingHoursSunday = openingHoursSunday;
     }
 
     @Override
@@ -74,8 +177,16 @@ public class Restaurant {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", openingHours='" + openingHours + '\'' +
+                ", openingHoursMonday='" + openingHoursMonday + '\'' +
+                ", openingHoursTuesday='" + openingHoursTuesday + '\'' +
+                ", openingHoursWednesday='" + openingHoursWednesday + '\'' +
+                ", openingHoursThursday='" + openingHoursThursday + '\'' +
+                ", openingHoursFriday='" + openingHoursFriday + '\'' +
+                ", openingHoursSaturday='" + openingHoursSaturday + '\'' +
+                ", openingHoursSunday='" + openingHoursSunday + '\'' +
                 ", description='" + description + '\'' +
+                ", deliveryOption1=" + deliveryOption1 +
+                ", deliveryOption2=" + deliveryOption2 +
                 '}';
     }
 }
