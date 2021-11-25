@@ -1,5 +1,8 @@
 import Models.Request;
+import Models.Restaurant;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
 
 import java.io.*;
 import java.net.Socket;
@@ -15,10 +18,11 @@ import java.net.Socket;
     private InputStream inFromClient;
     private String message;
 
-    public SocketHandlerManager(Socket socket, UserManager chatManager)
+    public SocketHandlerManager(Socket socket, UserManager chatManager, RestaurantManager restaurantManager)
     {
       this.socket = socket;
       this.userManager = chatManager;
+      this.restaurantManager = restaurantManager;
 
       try
       {
@@ -56,9 +60,15 @@ import java.net.Socket;
       }
 
       if (request.getType().equals("AddRestaurant")){
-          restaurantManager.AddRestaurant(request.getContext());
-      }
+          System.out.println("I got a request" + request.getContext());
+          try{
+              restaurantManager.AddRestaurant(request.getContext());
+          }
+          catch (Exception e){
+            System.out.println(e);
+          }
 
+      }
     }
   }
 

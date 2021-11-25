@@ -8,7 +8,14 @@ public class RestaurantManager
   Gson gson = new Gson();
 
   public void AddRestaurant(String restaurantAsJson){
-    Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
-    food4UDAO.addRestaurant(restaurant);
+    System.out.println(restaurantAsJson);
+    try
+    {
+      Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
+      food4UDAO.addRestaurant(restaurant);
+    }
+    catch (Exception e){
+      System.out.println(e);
+    }
   }
 }
