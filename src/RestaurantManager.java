@@ -18,4 +18,14 @@ public class RestaurantManager
       System.out.println(e);
     }
   }
+
+  public void UpdateRestaurant(String restaurantAsJson){
+    try{
+      Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
+      food4UDAO.updateRestaurant(restaurant);
+    }
+    catch (Exception e){
+      System.out.println(e);
+    }
+  }
 }

@@ -46,6 +46,9 @@ import java.net.Socket;
       System.out.println(request.getContext());
       System.out.println(request.getType());
 
+
+      // *****USER stuffs*****
+      // Validate User
       if (request.getType().equals("ValidateUser")){
         String response = userManager.ValidateUser(request.getContext());
         byte[] responseAsBytes = response.getBytes();
@@ -59,6 +62,41 @@ import java.net.Socket;
         }
       }
 
+      // Add User
+      if (request.getType().equals("AddUser")){
+        System.out.println("I got a request to add User" + request.getContext());
+        try{
+          userManager.AddUser(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      // Update User
+      if (request.getType().equals("UpdateUser")){
+        System.out.println("I got a request to update User" + request.getContext());
+        try{
+          //userManager. MISSING FUNCTION;
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      // Delete User
+      if (request.getType().equals("DeleteUser")){
+        System.out.println("I got a request to delete User" + request.getContext());
+        try{
+          //userManager. MISSING FUNCTION;
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      // *****RESTAURANT stuffs*****
+      // Add Restaurant
       if (request.getType().equals("AddRestaurant")){
           System.out.println("I got a request to add Restaurant" + request.getContext());
           try{
@@ -69,10 +107,22 @@ import java.net.Socket;
           }
       }
 
-      if (request.getType().equals("AddUser")){
-        System.out.println("I got a request to add User" + request.getContext());
+      // Update Restaurant
+      if (request.getType().equals("UpdateRestaurant")){
+        System.out.println("I got a request to update a Restaurant" + request.getContext());
         try{
-          userManager.AddUser(request.getContext());
+          restaurantManager.UpdateRestaurant(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      // Delete Restaurant
+      if (request.getType().equals("DeleteRestaurant")){
+        System.out.println("I got a request to delete a Restaurant" + request.getContext());
+        try{
+          //restaurantManager. MISSING FUNCTION;
         }
         catch (Exception e){
           System.out.println(e);
