@@ -41,11 +41,10 @@ public class RestaurantManager
       System.out.println(e);
     }
   }
-  public void RemoveRestaurant(String restaurantAsJson){
-    System.out.println(restaurantAsJson);
+  public void RemoveRestaurant(int id){
     try
     {
-     //MISSING FUNCTION;
+      food4UDAO.deleteRestaurant(id);
     }
     catch (Exception e){
       System.out.println(e);

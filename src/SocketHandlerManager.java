@@ -1,6 +1,9 @@
 import Managers.MenuManager;
 import Managers.RestaurantManager;
 import Managers.UserManager;
+import Managers.MenuManager;
+import Managers.RestaurantManager;
+import Managers.UserManager;
 import Models.Request;
 import com.google.gson.Gson;
 
@@ -136,10 +139,20 @@ import java.net.Socket;
       }
 
       // Delete Restaurant
-      if (request.getType().equals("DeleteRestaurant")){
-        System.out.println("I got a request to delete a Restaurant" + request.getContext());
+      if (request.getType().equals("RemoveRestaurant")){
+        System.out.println("I got a request to remove a Restaurant" + request.getContext());
         try{
-          restaurantManager.RemoveRestaurant(request.getContext());
+          String response = restaurantManager.GetRestaurant(Integer.parseInt(request.getContext()));
+          restaurantManager.RemoveRestaurant(Integer.parseInt(request.getContext()));
+          byte[] responseAsBytes = response.getBytes();
+          try
+          {
+            outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+          }
+          catch (IOException e)
+          {
+            e.printStackTrace();
+          }
         }
         catch (Exception e){
           System.out.println(e);
