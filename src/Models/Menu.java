@@ -11,7 +11,6 @@ public class Menu
     this.menuID = menuID;
   }
 
-
   public int getMenuID()
   {
     return menuID;
