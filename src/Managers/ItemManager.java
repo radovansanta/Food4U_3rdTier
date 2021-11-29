@@ -2,21 +2,21 @@ package Managers;
 
 import DatabaseAccess.Food4UDAO;
 import Models.Category;
-import Models.Menu;
-import Models.Restaurant;
+import Models.Item;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-public class CategoryManager {
+public class ItemManager {
     Food4UDAO food4UDAO = Food4UDAO.getInstance();
     Gson gson = new Gson();
-    Menu menu;
+    Category category;
 
-    public void addCategory(String categoryAsJson){
-        System.out.println(categoryAsJson);
+    public void addItem(String itemAsJson)
+    {
+        System.out.println(itemAsJson);
         try{
-            Category category = gson.fromJson(categoryAsJson, Category.class);
-            food4UDAO.addCategory(category, menu.getMenuID());
+            Item item = gson.fromJson(itemAsJson, Item.class);
+            food4UDAO.addItem(item, category.getName());
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
