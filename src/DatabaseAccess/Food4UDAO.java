@@ -317,4 +317,17 @@ public class Food4UDAO implements ManageUsers, ManageRestaurants, ManageDelivery
             e.printStackTrace();
         }
     }
+
+
+    @Override
+    public void updateMenu(Menu menu) {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("UPDATE menu SET description = ? WHERE menu_id = ?");
+            statement.setString(1, menu.getDescription());
+            statement.setInt(2, menu.getMenuID());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
