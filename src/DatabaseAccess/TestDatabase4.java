@@ -15,12 +15,14 @@ public class TestDatabase4
                 "new_sunday", "new_description", deliveryOption1, deliveryOption2);
         Menu menu = new Menu(2, "new_description");
         Category category = new Category("starters");
+        Item item = new Item(1, "name", "Description", 12.09);
 
         //add to database
         //food4UDAO.addUser(user1);
         //food4UDAO.addRestaurant(restaurant1);
         //food4UDAO.addMenu(menu, 2);
-        food4UDAO.addCategory(category, 2);
+        //food4UDAO.addCategory(category, 2);
+        //food4UDAO.addItem(item, "starters");
 
         //update
         //food4UDAO.updateRestaurant(restaurant1);
