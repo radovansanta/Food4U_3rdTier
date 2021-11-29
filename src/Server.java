@@ -1,7 +1,8 @@
-import Managers.RestaurantManager;
-import Managers.UserManager;
+import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -41,10 +42,12 @@ public class Server {
 
     private UserManager userManager;
     private RestaurantManager restaurantManager;
+    private MenuManager menuManager;
 
      public Server(UserManager userManager, RestaurantManager restaurantManager) {
       this.userManager = userManager;
       this.restaurantManager = restaurantManager;
+      this.menuManager = menuManager;
     }
 
     public void startServer() {
