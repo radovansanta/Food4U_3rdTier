@@ -44,7 +44,7 @@ public class Server {
     private RestaurantManager restaurantManager;
     private MenuManager menuManager;
 
-     public Server(UserManager userManager, RestaurantManager restaurantManager, MenuManager menuManager) {
+     public Server(UserManager userManager, RestaurantManager restaurantManager) {
       this.userManager = userManager;
       this.restaurantManager = restaurantManager;
       this.menuManager = menuManager;
@@ -56,7 +56,7 @@ public class Server {
         while (true) {
           Socket socket = welcomeSocket.accept();
           System.out.println("Accepted");
-          SocketHandlerManager handler = new SocketHandlerManager(socket, userManager, restaurantManager, menuManager);
+          SocketHandlerManager handler = new SocketHandlerManager(socket, userManager, restaurantManager);
           new Thread(handler).start();
         }
       } catch (IOException e) {

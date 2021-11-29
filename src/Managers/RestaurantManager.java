@@ -1,3 +1,5 @@
+package Managers;
+
 import DatabaseAccess.Food4UDAO;
 import Models.Restaurant;
 import com.google.gson.Gson;
@@ -16,6 +18,17 @@ public class RestaurantManager
     }
     catch (Exception e){
       System.out.println(e);
+    }
+  }
+
+  public String GetRestaurant(int restaurantID){
+    try
+    {
+      return gson.toJson(food4UDAO.getRestaurant(restaurantID));
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
     }
   }
 

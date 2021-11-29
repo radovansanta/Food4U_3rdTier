@@ -1,3 +1,5 @@
+import Managers.RestaurantManager;
+import Managers.UserManager;
 import Models.Request;
 import Models.Restaurant;
 import com.google.gson.Gson;
@@ -107,6 +109,21 @@ import java.net.Socket;
           catch (Exception e){
             System.out.println(e);
           }
+      }
+
+      // Get Restaurant
+      if (request.getType().equals("GetRestaurant")){
+        System.out.println("I got a request to get Restaurant" + request.getContext());
+        String response = restaurantManager.GetRestaurant(Integer.parseInt(request.getContext()));
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
       }
 
       // Update Restaurant
