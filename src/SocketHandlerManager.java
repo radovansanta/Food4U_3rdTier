@@ -174,6 +174,20 @@ import java.net.Socket;
         System.out.println(e);
       }
 
+      // Update Menu
+      if (request.getType().equals("UpdateMenu"))
+      {
+        System.out.println("I got a request to update Menu" + request.getContext());
+      }
+      try
+      {
+        menuManager.updateMenu(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
     }
   }
 
