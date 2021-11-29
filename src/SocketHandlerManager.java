@@ -107,6 +107,21 @@ import java.net.Socket;
           }
       }
 
+      // Get Restaurant
+      if (request.getType().equals("GetRestaurant")){
+        System.out.println("I got a request to get Restaurant" + request.getContext());
+        String response = restaurantManager.GetRestaurant(Integer.parseInt(request.getContext()));
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
       // Update Restaurant
       if (request.getType().equals("UpdateRestaurant")){
         System.out.println("I got a request to update a Restaurant" + request.getContext());

@@ -19,6 +19,17 @@ public class RestaurantManager
     }
   }
 
+  public String GetRestaurant(int restaurantID){
+    try
+    {
+      return gson.toJson(food4UDAO.getRestaurant(restaurantID));
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
+    }
+  }
+
   public void UpdateRestaurant(String restaurantAsJson){
     try{
       Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
