@@ -16,21 +16,20 @@ public class Restaurant {
     private DeliveryOption deliveryOption1;
     private DeliveryOption deliveryOption2;
 
-    public Restaurant(int restaurantID, String name, String address, String phoneNumber, String openingHoursMonday,
-                      String openingHoursTuesday, String openingHoursWednesday, String openingHoursThursday,
-                      String openingHoursFriday, String openingHoursSaturday, String openingHoursSunday,
+    public Restaurant(int restaurantID, String name, String address, String phoneNumber, String monday,
+                      String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday,
                       String description, DeliveryOption deliveryOption1, DeliveryOption deliveryOption2) {
         this.restaurantID = restaurantID;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.openingHoursMonday = openingHoursMonday;
-        this.openingHoursTuesday = openingHoursTuesday;
-        this.openingHoursWednesday = openingHoursWednesday;
-        this.openingHoursThursday = openingHoursThursday;
-        this.openingHoursFriday = openingHoursFriday;
-        this.openingHoursSaturday = openingHoursSaturday;
-        this.openingHoursSunday = openingHoursSunday;
+        this.openingHoursMonday = monday;
+        this.openingHoursTuesday = tuesday;
+        this.openingHoursWednesday = wednesday;
+        this.openingHoursThursday = thursday;
+        this.openingHoursFriday = friday;
+        this.openingHoursSaturday = saturday;
+        this.openingHoursSunday = sunday;
         this.description = description;
         this.deliveryOption1 = deliveryOption1;
         this.deliveryOption2 = deliveryOption2;
