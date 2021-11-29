@@ -1,4 +1,4 @@
-import com.google.gson.Gson;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,10 +42,12 @@ public class Server {
 
     private UserManager userManager;
     private RestaurantManager restaurantManager;
+    private MenuManager menuManager;
 
-     public Server(UserManager userManager, RestaurantManager restaurantManager) {
+     public Server(UserManager userManager, RestaurantManager restaurantManager, MenuManager menuManager) {
       this.userManager = userManager;
       this.restaurantManager = restaurantManager;
+      this.menuManager = menuManager;
     }
 
     public void startServer() {
@@ -54,7 +56,7 @@ public class Server {
         while (true) {
           Socket socket = welcomeSocket.accept();
           System.out.println("Accepted");
-          SocketHandlerManager handler = new SocketHandlerManager(socket, userManager, restaurantManager);
+          SocketHandlerManager handler = new SocketHandlerManager(socket, userManager, restaurantManager, menuManager);
           new Thread(handler).start();
         }
       } catch (IOException e) {

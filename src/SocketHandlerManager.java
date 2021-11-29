@@ -13,16 +13,18 @@ import java.net.Socket;
     private Socket socket;
     private UserManager userManager;
     private RestaurantManager restaurantManager;
+    private MenuManager menuManager;
 
     private OutputStream outToClient;
     private InputStream inFromClient;
     private String message;
 
-    public SocketHandlerManager(Socket socket, UserManager chatManager, RestaurantManager restaurantManager)
+    public SocketHandlerManager(Socket socket, UserManager chatManager, RestaurantManager restaurantManager, MenuManager menuManager)
     {
       this.socket = socket;
       this.userManager = chatManager;
       this.restaurantManager = restaurantManager;
+      this.menuManager = menuManager;
 
       try
       {
@@ -127,6 +129,21 @@ import java.net.Socket;
         catch (Exception e){
           System.out.println(e);
         }
+      }
+
+      // *****MENU stuffs*****
+      // Add Menu
+      if (request.getType().equals("AddMenu"))
+      {
+        System.out.println("I got a request to add Menu" + request.getContext());
+      }
+      try
+      {
+        menuManager.AddMenu(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
       }
 
     }
