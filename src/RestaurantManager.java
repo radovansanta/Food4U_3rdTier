@@ -28,4 +28,14 @@ public class RestaurantManager
       System.out.println(e);
     }
   }
+  public void RemoveRestaurant(String restaurantAsJson){
+    System.out.println(restaurantAsJson);
+    try
+    {
+     //MISSING FUNCTION;
+    }
+    catch (Exception e){
+      System.out.println(e);
+    }
+  }
 }

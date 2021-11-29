@@ -122,7 +122,7 @@ import java.net.Socket;
       if (request.getType().equals("DeleteRestaurant")){
         System.out.println("I got a request to delete a Restaurant" + request.getContext());
         try{
-          //restaurantManager. MISSING FUNCTION;
+          restaurantManager.RemoveRestaurant(request.getContext());
         }
         catch (Exception e){
           System.out.println(e);
