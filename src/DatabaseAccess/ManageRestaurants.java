@@ -8,4 +8,5 @@ public interface ManageRestaurants
     Restaurant getRestaurant(int restaurantID);
     void updateRestaurant(Restaurant restaurant);
     Restaurant getRestaurantByName(String name);
+    void deleteRestaurant(int restaurantID);
 }

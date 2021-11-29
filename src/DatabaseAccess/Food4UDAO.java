@@ -5,7 +5,7 @@ import Models.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Food4UDAO implements ManageUsers, ManageRestaurants, ManageDeliveryOptions {
+public class Food4UDAO implements ManageUsers, ManageRestaurants, ManageDeliveryOptions, ManageMenus {
     private static Food4UDAO instance;
 
     public static Food4UDAO getInstance() {
@@ -185,6 +185,17 @@ public class Food4UDAO implements ManageUsers, ManageRestaurants, ManageDelivery
         return restaurant;
     }
 
+    @Override
+    public void deleteRestaurant(int restaurantID) {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM restaurant WHERE restaurant_id = ?");
+            statement.setInt(1, restaurantID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Restaurant getRestaurant(ResultSet resultSet) {
         Restaurant restaurant = new Restaurant();
         try {
@@ -293,5 +304,17 @@ public class Food4UDAO implements ManageUsers, ManageRestaurants, ManageDelivery
             e.printStackTrace();
         }
         return deliveryOption;
+    }
+
+    public void addMenu(Menu menu, int restaurantID) {
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO menu(description, restaurant_id)" +
+                    "VALUES (?, ?)");
+            statement.setString(1, menu.getDescription());
+            statement.setInt(2, restaurantID);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
