@@ -1,6 +1,6 @@
 package Models;
 
-public class Restaurant {
+public class Restaurant extends User {
     private int restaurantID;
     private String name;
     private String address;
@@ -15,6 +15,8 @@ public class Restaurant {
     private String description;
     private DeliveryOption deliveryOption1;
     private DeliveryOption deliveryOption2;
+    private Menu menu;
+
 
     public Restaurant(int restaurantID, String name, String address, String phoneNumber, String monday,
                       String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday,

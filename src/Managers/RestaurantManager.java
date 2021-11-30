@@ -35,6 +35,7 @@ public class RestaurantManager
   public void UpdateRestaurant(String restaurantAsJson){
     try{
       Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
+      System.out.println("Restaurant object is: "+restaurant);
       food4UDAO.updateRestaurant(restaurant);
     }
     catch (Exception e){
