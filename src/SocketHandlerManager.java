@@ -1,13 +1,9 @@
-import Managers.RestaurantManager;
-import Managers.UserManager;
+import Managers.*;
 import Managers.MenuManager;
 import Managers.RestaurantManager;
 import Managers.UserManager;
 import Models.Request;
-import Models.Restaurant;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParser;
 
 import java.io.*;
 import java.net.Socket;
@@ -19,17 +15,20 @@ import java.net.Socket;
     private UserManager userManager;
     private RestaurantManager restaurantManager;
     private MenuManager menuManager;
+    private CategoryManager categoryManager;
 
     private OutputStream outToClient;
     private InputStream inFromClient;
     private String message;
 
-    public SocketHandlerManager(Socket socket, UserManager chatManager, RestaurantManager restaurantManager, MenuManager menuManager)
+    public SocketHandlerManager(Socket socket, UserManager chatManager, RestaurantManager restaurantManager, MenuManager menuManager,
+        CategoryManager categoryManager)
     {
       this.socket = socket;
       this.userManager = chatManager;
       this.restaurantManager = restaurantManager;
       this.menuManager = menuManager;
+      this.categoryManager = categoryManager;
 
       try
       {
@@ -170,6 +169,35 @@ import java.net.Socket;
       try
       {
         menuManager.AddMenu(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
+      // Update Menu
+      if (request.getType().equals("UpdateMenu"))
+      {
+        System.out.println("I got a request to update Menu" + request.getContext());
+      }
+      try
+      {
+        menuManager.updateMenu(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
+      // *****Category stuffs*****
+      // Add Category
+      if (request.getType().equals("AddCategory"))
+      {
+        System.out.println("I got a request to add Category" + request.getContext());
+      }
+      try
+      {
+        categoryManager.addCategory(request.getContext());
       }
       catch (Exception e)
       {

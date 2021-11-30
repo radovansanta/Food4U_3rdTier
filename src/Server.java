@@ -1,3 +1,4 @@
+import Managers.*;
 import Managers.MenuManager;
 import Managers.RestaurantManager;
 import Managers.UserManager;
@@ -44,11 +45,13 @@ public class Server {
     private UserManager userManager;
     private RestaurantManager restaurantManager;
     private MenuManager menuManager;
+    private CategoryManager categoryManager;
 
-     public Server(UserManager userManager, RestaurantManager restaurantManager, MenuManager menuManager) {
+     public Server(UserManager userManager, RestaurantManager restaurantManager, MenuManager menuManager, CategoryManager categoryManager) {
       this.userManager = userManager;
       this.restaurantManager = restaurantManager;
       this.menuManager = menuManager;
+      this. categoryManager = categoryManager;
     }
 
     public void startServer() {
@@ -57,7 +60,7 @@ public class Server {
         while (true) {
           Socket socket = welcomeSocket.accept();
           System.out.println("Accepted");
-          SocketHandlerManager handler = new SocketHandlerManager(socket, userManager, restaurantManager, menuManager);
+          SocketHandlerManager handler = new SocketHandlerManager(socket, userManager, restaurantManager, menuManager, categoryManager);
           new Thread(handler).start();
         }
       } catch (IOException e) {
