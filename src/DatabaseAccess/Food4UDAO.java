@@ -343,6 +343,8 @@ public class Food4UDAO implements ManageUsers, ManageRestaurants, ManageDelivery
         }
     }
 
+
+
     @Override
     public void addItem(Item item, String categoryName) {
         try(Connection connection = getConnection()){
@@ -356,5 +358,9 @@ public class Food4UDAO implements ManageUsers, ManageRestaurants, ManageDelivery
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public void updateCategory(Category category) {
+
     }
 }
