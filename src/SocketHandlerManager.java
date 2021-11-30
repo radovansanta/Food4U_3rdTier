@@ -3,6 +3,7 @@ import Managers.MenuManager;
 import Managers.RestaurantManager;
 import Managers.UserManager;
 import Models.Request;
+import Models.Restaurant;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -117,6 +118,21 @@ import java.net.Socket;
       if (request.getType().equals("GetRestaurant")){
         System.out.println("I got a request to get Restaurant" + request.getContext());
         String response = restaurantManager.GetRestaurant(Integer.parseInt(request.getContext()));
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
+      // Validate Restaurant
+      if (request.getType().equals("ValidateRestaurant")){
+        System.out.println("I got a request to validate Restaurant" + request.getContext());
+        String response = restaurantManager.ValidateLogin(request.getContext());
         byte[] responseAsBytes = response.getBytes();
         try
         {
