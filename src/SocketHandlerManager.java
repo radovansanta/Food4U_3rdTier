@@ -17,19 +17,21 @@ import java.net.Socket;
     private RestaurantManager restaurantManager;
     private MenuManager menuManager;
     private CategoryManager categoryManager;
+    private ItemManager itemManager;
 
     private OutputStream outToClient;
     private InputStream inFromClient;
     private String message;
 
     public SocketHandlerManager(Socket socket, UserManager chatManager, RestaurantManager restaurantManager, MenuManager menuManager,
-        CategoryManager categoryManager)
+        CategoryManager categoryManager, ItemManager itemManager)
     {
       this.socket = socket;
       this.userManager = chatManager;
       this.restaurantManager = restaurantManager;
       this.menuManager = menuManager;
       this.categoryManager = categoryManager;
+      this.itemManager = itemManager;
 
       try
       {
@@ -200,6 +202,36 @@ import java.net.Socket;
       {
         System.out.println(e);
       }
+
+      // *****Item stuffs*****
+      // Add Item
+      if (request.getType().equals("AddItem"))
+      {
+        System.out.println("I got a request to add Item" + request.getContext());
+      }
+      try
+      {
+        itemManager.addItem(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
+      // Update Item
+      if (request.getType().equals("UpdateItem"))
+      {
+        System.out.println("I got a request to update Item" + request.getContext());
+      }
+      try
+      {
+        itemManager.updateItem(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
 
 
     }

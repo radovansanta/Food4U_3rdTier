@@ -20,4 +20,9 @@ public class ItemManager {
             e.printStackTrace();
         }
     }
+
+    public void updateItem(String itemAsJson)
+    {
+
+    }
 }
