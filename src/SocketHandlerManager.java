@@ -68,39 +68,6 @@ import java.net.Socket;
         }
       }
 
-      // Add User
-      if (request.getType().equals("AddUser")){
-        System.out.println("I got a request to add User" + request.getContext());
-        try{
-          userManager.AddUser(request.getContext());
-        }
-        catch (Exception e){
-          System.out.println(e);
-        }
-      }
-
-      // Update User
-      if (request.getType().equals("UpdateUser")){
-        System.out.println("I got a request to update User" + request.getContext());
-        try{
-          //userManager. MISSING FUNCTION;
-        }
-        catch (Exception e){
-          System.out.println(e);
-        }
-      }
-
-      // Delete User
-      if (request.getType().equals("DeleteUser")){
-        System.out.println("I got a request to delete User" + request.getContext());
-        try{
-          //userManager. MISSING FUNCTION;
-        }
-        catch (Exception e){
-          System.out.println(e);
-        }
-      }
-
       // *****RESTAURANT stuffs*****
       // Add Restaurant
       if (request.getType().equals("AddRestaurant")){
@@ -116,7 +83,7 @@ import java.net.Socket;
       // Get Restaurant
       if (request.getType().equals("GetRestaurant")){
         System.out.println("I got a request to get Restaurant" + request.getContext());
-        String response = restaurantManager.GetRestaurant(Integer.parseInt(request.getContext()));
+        String response = restaurantManager.GetRestaurant(request.getContext());
         byte[] responseAsBytes = response.getBytes();
         try
         {
@@ -143,8 +110,8 @@ import java.net.Socket;
       if (request.getType().equals("RemoveRestaurant")){
         System.out.println("I got a request to remove a Restaurant" + request.getContext());
         try{
-          String response = restaurantManager.GetRestaurant(Integer.parseInt(request.getContext()));
-          restaurantManager.RemoveRestaurant(Integer.parseInt(request.getContext()));
+          String response = restaurantManager.GetRestaurant(request.getContext());
+          restaurantManager.RemoveRestaurant(request.getContext());
           byte[] responseAsBytes = response.getBytes();
           try
           {

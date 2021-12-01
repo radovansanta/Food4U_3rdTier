@@ -5,8 +5,7 @@ import Models.Restaurant;
 public interface ManageRestaurants
 {
     void addRestaurant(Restaurant restaurant);
-    Restaurant getRestaurant(int restaurantID);
+    Restaurant getRestaurant(String username);
     void updateRestaurant(Restaurant restaurant);
-    Restaurant getRestaurantByName(String name);
-    void deleteRestaurant(int restaurantID);
+    void deleteRestaurant(String username);
 }

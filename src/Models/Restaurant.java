@@ -1,7 +1,7 @@
 package Models;
 
 public class Restaurant extends User {
-    private int restaurantID;
+
     private String name;
     private String address;
     private String phoneNumber;
@@ -17,11 +17,28 @@ public class Restaurant extends User {
     private DeliveryOption deliveryOption2;
     private Menu menu;
 
+    public Restaurant(){
+        super(null,null);
+        name = null;
+        address = null;
+        phoneNumber = null;
+        openingHoursMonday = null;
+        openingHoursTuesday = null;
+        openingHoursWednesday = null;
+        openingHoursThursday = null;
+        openingHoursFriday = null;
+        openingHoursSaturday = null;
+        openingHoursSunday = null;
+        description = null;
+        deliveryOption1 = null;
+        deliveryOption2 = null;
+        menu = null;
+    }
 
-    public Restaurant(int restaurantID, String name, String address, String phoneNumber, String monday,
-                      String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday,
-                      String description, DeliveryOption deliveryOption1, DeliveryOption deliveryOption2) {
-        this.restaurantID = restaurantID;
+    public Restaurant(String username, String password, String name, String address, String phoneNumber,
+                      String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday,
+                      String description) {
+        super(username, password);
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
@@ -33,34 +50,10 @@ public class Restaurant extends User {
         this.openingHoursSaturday = saturday;
         this.openingHoursSunday = sunday;
         this.description = description;
-        this.deliveryOption1 = deliveryOption1;
-        this.deliveryOption2 = deliveryOption2;
     }
 
-    public Restaurant(String name, String address, String phoneNumber, String openingHoursMonday,
-                      String openingHoursTuesday, String openingHoursWednesday, String openingHoursThursday,
-                      String openingHoursFriday, String openingHoursSaturday, String openingHoursSunday,
-                      String description, DeliveryOption deliveryOption1, DeliveryOption deliveryOption2) {
-        this.name = name;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.openingHoursMonday = openingHoursMonday;
-        this.openingHoursTuesday = openingHoursTuesday;
-        this.openingHoursWednesday = openingHoursWednesday;
-        this.openingHoursThursday = openingHoursThursday;
-        this.openingHoursFriday = openingHoursFriday;
-        this.openingHoursSaturday = openingHoursSaturday;
-        this.openingHoursSunday = openingHoursSunday;
-        this.description = description;
-        this.deliveryOption1 = deliveryOption1;
-        this.deliveryOption2 = deliveryOption2;
-    }
-
-    public Restaurant() {
-    }
-
-    public int getRestaurantID() {
-        return restaurantID;
+    public Menu getMenu() {
+        return menu;
     }
 
     public DeliveryOption getDeliveryOption1() {
@@ -115,6 +108,10 @@ public class Restaurant extends User {
         return phoneNumber;
     }
 
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
     public void setAddress(String address) {
         this.address = address;
     }
@@ -125,10 +122,6 @@ public class Restaurant extends User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public void setRestaurantID(int restaurantID) {
-        this.restaurantID = restaurantID;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -173,8 +166,8 @@ public class Restaurant extends User {
 
     @Override
     public String toString() {
-        return "Restaurant{" +
-                "restaurantID=" + restaurantID +
+        return super.toString() +
+                "Restaurant{" +
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
@@ -188,6 +181,7 @@ public class Restaurant extends User {
                 ", description='" + description + '\'' +
                 ", deliveryOption1=" + deliveryOption1 +
                 ", deliveryOption2=" + deliveryOption2 +
+                ", menu=" + menu +
                 '}';
     }
 }

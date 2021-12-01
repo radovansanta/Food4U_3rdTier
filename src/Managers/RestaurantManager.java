@@ -21,10 +21,10 @@ public class RestaurantManager
     }
   }
 
-  public String GetRestaurant(int restaurantID){
+  public String GetRestaurant(String username){
     try
     {
-      return gson.toJson(food4UDAO.getRestaurant(restaurantID));
+      return gson.toJson(food4UDAO.getRestaurant(username));
     }
     catch (Exception e){
       System.out.println(e);
@@ -42,10 +42,10 @@ public class RestaurantManager
       System.out.println(e);
     }
   }
-  public void RemoveRestaurant(int id){
+  public void RemoveRestaurant(String username){
     try
     {
-      food4UDAO.deleteRestaurant(id);
+      food4UDAO.deleteRestaurant(username);
     }
     catch (Exception e){
       System.out.println(e);

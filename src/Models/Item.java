@@ -5,13 +5,23 @@ public class Item {
     private String name;
     private String description;
     private double price;
+    private String categoryName;
 
-    public Item(int itemID, String name, String description, double price)
+    public Item(){
+        itemID = 0;
+        name = null;
+        description = null;
+        price = 0;
+        categoryName = null;
+    }
+
+    public Item(int itemID, String name, String description, double price, String categoryName)
     {
         this.itemID = itemID;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.categoryName = categoryName;
     }
 
     public void setName(String name) {
@@ -30,6 +40,10 @@ public class Item {
         this.itemID = itemID;
     }
 
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public String getName() {
         return name;
     }
@@ -46,6 +60,10 @@ public class Item {
         return itemID;
     }
 
+    public String getCategoryName() {
+        return categoryName;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -53,6 +71,7 @@ public class Item {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
+                ", categoryName='" + categoryName + '\'' +
                 '}';
     }
 }

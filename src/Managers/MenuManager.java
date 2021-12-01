@@ -10,7 +10,6 @@ public class MenuManager
 {
   Food4UDAO food4UDAO = Food4UDAO.getInstance();
   Gson gson = new Gson();
-  Restaurant restaurant;
 
   public void AddMenu(String menuAsJson)
   {
@@ -18,7 +17,7 @@ public class MenuManager
     try
     {
       Menu menu = gson.fromJson(menuAsJson, Menu.class);
-      food4UDAO.addMenu(menu, restaurant.getRestaurantID());
+      food4UDAO.addMenu(menu);
     }
     catch (Exception e)
     {

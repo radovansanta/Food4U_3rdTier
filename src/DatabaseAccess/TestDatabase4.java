@@ -1,21 +1,19 @@
 package DatabaseAccess;
 
-import Models.*;
-
 public class TestDatabase4
 {
     public static void main(String[] args) {
-        Food4UDAO food4UDAO = Food4UDAO.getInstance();
-        User user1 = new User("user", "password");
-        DeliveryOption deliveryOption1 = new DeliveryOption(1,"takeaway", 0);
-        DeliveryOption deliveryOption2 = new DeliveryOption(2,"delivery", 199);
-        Restaurant restaurant1 = new Restaurant(1, "new_name", "new_address", "098754",
-                "new_monday", "new_tuesday","new_wednesday",
-                "new_thursday", "new_friday", "saturday",
-                "new_sunday", "new_description", deliveryOption1, deliveryOption2);
-        Menu menu = new Menu(2, "new_description");
-        Category category = new Category("starters");
-        Item item = new Item(1, "name", "Description", 12.09);
+        //Food4UDAOold food4UDAOold = Food4UDAOold.getInstance();
+       // User user1 = new User("user", "password");
+       // DeliveryOption deliveryOption1 = new DeliveryOption(1,"takeaway", 0);
+       // DeliveryOption deliveryOption2 = new DeliveryOption(2,"delivery", 199);
+        //Restaurant restaurant1 = new Restaurant(1, "new_name", "new_address", "098754",
+              //  "new_monday", "new_tuesday","new_wednesday",
+              //  "new_thursday", "new_friday", "saturday",
+              //  "new_sunday", "new_description", deliveryOption1, deliveryOption2);
+        //Menu menu = new Menu(2, "new_description");
+        //Category category = new Category("starters");
+        //Item item = new Item(1, "name", "Description", 12.09);
 
         //add to database
         //food4UDAO.addUser(user1);
