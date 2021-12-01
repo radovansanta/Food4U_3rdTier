@@ -3,6 +3,7 @@ import Managers.MenuManager;
 import Managers.RestaurantManager;
 import Managers.UserManager;
 import Models.Request;
+import Models.Restaurant;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -95,6 +96,21 @@ import java.net.Socket;
         }
       }
 
+      // Validate Restaurant
+      if (request.getType().equals("ValidateRestaurant")){
+        System.out.println("I got a request to validate Restaurant" + request.getContext());
+        String response = restaurantManager.ValidateLogin(request.getContext());
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
       // Update Restaurant
       if (request.getType().equals("UpdateRestaurant")){
         System.out.println("I got a request to update a Restaurant" + request.getContext());
@@ -170,6 +186,21 @@ import java.net.Socket;
       {
         System.out.println(e);
       }
+
+      // Update Category
+      if (request.getType().equals("UpdateCategory"))
+      {
+        System.out.println("I got a request to update Category" + request.getContext());
+      }
+      try
+      {
+        categoryManager.updateCategory(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
 
     }
   }

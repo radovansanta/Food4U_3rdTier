@@ -32,6 +32,20 @@ public class RestaurantManager
     }
   }
 
+  public String ValidateLogin(String username){
+    try
+    {
+      // TODO Create a method in DAO class
+      //return gson.toJson(food4UDAO.validateRestaurant(username));
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
+    }
+    // TODO Delete line below after DAO method is implemented
+    return username;
+  }
+
   public void UpdateRestaurant(String restaurantAsJson){
     try{
       Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);

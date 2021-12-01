@@ -19,4 +19,7 @@ public class CategoryManager {
             e.printStackTrace();
         }
     }
+
+    public void updateCategory(String context) {
+    }
 }
