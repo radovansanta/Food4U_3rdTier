@@ -435,6 +435,11 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         }
     }
 
+    @Override
+    public void updateCategory(Category category) {
+
+    }
+
     // TODO: 01.12.2021 test
     @Override
     public ArrayList<Category> getCategoriesByMenuID(int menuID) {

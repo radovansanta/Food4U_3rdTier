@@ -20,7 +20,17 @@ public class CategoryManager {
         }
     }
 
-    public void updateCategory(String context) {
+    public void updateCategory(String categoryAsJson) {
+        System.out.println(categoryAsJson);
+        try {
+            Category category = gson.fromJson(categoryAsJson, Category.class);
+            food4UDAO.updateCategory(category);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteCategory(String categoryAsJson) {
+
     }
 
     public void RemoveCategory(String categoryName)
