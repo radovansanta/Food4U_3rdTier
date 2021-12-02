@@ -32,4 +32,14 @@ public class ItemManager {
             e.printStackTrace();
         }
     }
+
+    public void deleteItem(String itemAsJson){
+        System.out.println(itemAsJson);
+        try{
+            Item item = gson.fromJson(itemAsJson, Item.class);
+            food4UDAO.deleteItem(item.getItemID());
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        }
+    }
 }

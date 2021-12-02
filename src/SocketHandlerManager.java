@@ -204,6 +204,20 @@ import java.net.Socket;
         System.out.println(e);
       }
 
+// Delete Category
+      if (request.getType().equals("DeleteCategory"))
+      {
+        System.out.println("I got a request to delete Category" + request.getContext());
+      }
+      try
+      {
+        categoryManager.deleteCategory(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
       // *****Item stuffs*****
       // Add Item
       if (request.getType().equals("AddItem"))
@@ -227,6 +241,20 @@ import java.net.Socket;
       try
       {
         itemManager.updateItem(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
+      // Delete Item
+      if (request.getType().equals("DeleteItem"))
+      {
+        System.out.println("I got a request to delete Item" + request.getContext());
+      }
+      try
+      {
+        itemManager.deleteItem(request.getContext());
       }
       catch (Exception e)
       {
