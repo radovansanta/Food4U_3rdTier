@@ -3,6 +3,7 @@ package Managers;
 import DatabaseAccess.Food4UDAO;
 import Models.Category;
 import Models.Item;
+import Models.Menu;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -23,6 +24,12 @@ public class ItemManager {
 
     public void updateItem(String itemAsJson)
     {
-
+        System.out.println(itemAsJson);
+        try{
+            Item item = gson.fromJson(itemAsJson, Item.class);
+            food4UDAO.updateItem(item);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        }
     }
 }

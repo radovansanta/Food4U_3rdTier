@@ -1,5 +1,6 @@
 package DatabaseAccess;
 
+
 import Models.Item;
 
 import java.util.ArrayList;
@@ -10,4 +11,5 @@ public interface ManageItems {
     void updateItem(Item item);
     void deleteItem(int itemID);
     ArrayList<Item> getItemsByCategoryName(String categoryName);
+
 }
