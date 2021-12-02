@@ -246,6 +246,20 @@ import java.net.Socket;
         System.out.println(e);
       }
 
+      // Delete Item
+      if (request.getType().equals("DeleteItem"))
+      {
+        System.out.println("I got a request to delete Item" + request.getContext());
+      }
+      try
+      {
+        itemManager.deleteItem(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
 
 
     }
