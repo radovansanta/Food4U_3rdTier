@@ -10,4 +10,4 @@ public class RunServer {
     Server ss = new Server(new UserManager(), new RestaurantManager(), new MenuManager(), new CategoryManager(), new ItemManager());
     ss.startServer();
   }
-}
+} 

@@ -38,7 +38,7 @@ import java.net.Socket;
         outToClient = this.socket.getOutputStream();
         inFromClient = this.socket.getInputStream();
 
-        byte[] lenbytes = new byte[1024];
+        byte[] lenbytes = new byte[1024*4];
         int read = inFromClient.read(lenbytes, 0, lenbytes.length);
         message = new String(lenbytes, 0, read);
         System.out.println(message);
@@ -51,6 +51,7 @@ import java.net.Socket;
 
     @Override public void run()
     {
+      System.out.println("MESSAGE IS: " +message);
       Request request = new Gson().fromJson(message, Request.class);
       System.out.println(request.getContext());
       System.out.println(request.getType());
