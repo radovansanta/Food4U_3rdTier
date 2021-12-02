@@ -32,4 +32,16 @@ public class CategoryManager {
     public void deleteCategory(String categoryAsJson) {
 
     }
+
+    public void RemoveCategory(String categoryName)
+    {
+        try
+        {
+            food4UDAO.deleteCategory(categoryName);
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+    }
 }
