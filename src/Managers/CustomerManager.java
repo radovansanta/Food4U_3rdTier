@@ -23,4 +23,16 @@ public class CustomerManager
       System.out.println(e);
     }
   }
+
+  public String GetCustomer(String username)
+  {
+    try
+    {
+      return gson.toJson(food4UDAO.getCustomer(username));
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
+    }
+  }
 }
