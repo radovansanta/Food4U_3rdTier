@@ -35,7 +35,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO restaurant(user_name, password, name," +
                     "address, phone_number, monday, tuesday, wednesday, thursday, friday, saturday, sunday," +
-                    " description) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+                    " description, visibility) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, restaurant.getUsername());
             statement.setString(2, restaurant.getPassword());
             statement.setString(3, restaurant.getName());
@@ -49,6 +49,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             statement.setString(11, restaurant.getOpeningHoursSaturday());
             statement.setString(12, restaurant.getOpeningHoursSunday());
             statement.setString(13, restaurant.getDescription());
+            statement.setBoolean(14, restaurant.getVisibility());
             statement.executeUpdate();
             if (restaurant.getDeliveryOption1() != null) {
                 addDeliveryOption(restaurant.getDeliveryOption1());
@@ -130,6 +131,10 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             statement.setString(1, restaurant.getDescription());
             statement.setString(2, restaurant.getUsername());
             statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE restaurant SET visibility = ? WHERE user_name = ?");
+            statement.setBoolean(1, restaurant.getVisibility());
+            statement.setString(2, restaurant.getUsername());
+            statement.executeUpdate();
             if(restaurant.getDeliveryOption1() != null)
                 updateDeliveryOption(restaurant.getDeliveryOption1());
             if(restaurant.getDeliveryOption2() != null)
@@ -170,6 +175,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             String openingHoursSaturday = resultSet.getString(11);
             String openingHoursSunday = resultSet.getString(12);
             String description = resultSet.getString(13);
+            boolean visibility = resultSet.getBoolean(14);
             ArrayList<DeliveryOption> deliveryOptions = getDeliveryOptionsByUsername(username);
             Menu menu = getMenuByRestaurant(username);
             restaurant.setUsername(username);
@@ -185,6 +191,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             restaurant.setOpeningHoursSaturday(openingHoursSaturday);
             restaurant.setOpeningHoursSunday(openingHoursSunday);
             restaurant.setDescription(description);
+            restaurant.setVisibility(visibility);
             if (deliveryOptions.size() >= 1) {
                 restaurant.setDeliveryOption1(deliveryOptions.get(0));
             }
@@ -475,12 +482,13 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
     @Override
     public void addItem(Item item) {
         try(Connection connection = getConnection()){
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO item(name, description, price, category_name)" +
-                    "VALUES (?, ?, ?, ?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO item(name, description, price, " +
+                    "category_name, discount) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, item.getName());
             statement.setString(2, item.getDescription());
             statement.setDouble(3, item.getPrice());
             statement.setString(4, item.getCategoryName());
+            statement.setInt(5, item.getDiscount());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -504,7 +512,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         return item;
     }
 
-    // TODO: 01.12.2021 test 
+    // TODO: 01.12.2021 test
     @Override
     public void updateItem(Item item) {
         try(Connection connection = getConnection()) {
@@ -518,6 +526,10 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             statement.executeUpdate();
             statement = connection.prepareStatement("UPDATE item SET price = ? WHERE item_id = ?");
             statement.setDouble(1, item.getPrice());
+            statement.setInt(2, item.getItemID());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE item SET discount = ? WHERE item_id = ?");
+            statement.setInt(1, item.getDiscount());
             statement.setInt(2, item.getItemID());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -554,7 +566,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         return items;
     }
 
-    // TODO: 01.12.2021 test 
+    // TODO: 01.12.2021 test
     private Item getItem(ResultSet resultSet){
         Item item = new Item();
         try{
@@ -563,6 +575,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             String description = resultSet.getString(3);
             double price = resultSet.getDouble(4);
             String categoryName = resultSet.getString(5);
+            int discount = resultSet.getInt(6);
             item.setItemID(itemID);
             item.setName(name);
             item.setPrice(price);
