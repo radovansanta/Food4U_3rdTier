@@ -256,6 +256,21 @@ import java.net.Socket;
         }
       }
 
+      // Get Customer
+      if (request.getType().equals("GetCustomer")){
+        System.out.println("I got a request to get Customer" + request.getContext());
+        String response = customerManager.GetCustomer(request.getContext());
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
 
 
 
