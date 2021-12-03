@@ -18,13 +18,14 @@ import java.net.Socket;
     private MenuManager menuManager;
     private CategoryManager categoryManager;
     private ItemManager itemManager;
+    private CustomerManager customerManager;
 
     private OutputStream outToClient;
     private InputStream inFromClient;
     private String message;
 
     public SocketHandlerManager(Socket socket, UserManager chatManager, RestaurantManager restaurantManager, MenuManager menuManager,
-        CategoryManager categoryManager, ItemManager itemManager)
+        CategoryManager categoryManager, ItemManager itemManager,CustomerManager customerManager)
     {
       this.socket = socket;
       this.userManager = chatManager;
@@ -32,6 +33,7 @@ import java.net.Socket;
       this.menuManager = menuManager;
       this.categoryManager = categoryManager;
       this.itemManager = itemManager;
+      this.customerManager = customerManager;
 
       try
       {
@@ -260,6 +262,20 @@ import java.net.Socket;
       {
         System.out.println(e);
       }
+
+      // *****CUSTOMER stuffs*****
+      // Add Customer
+      if (request.getType().equals("AddCustomer")){
+        System.out.println("I got a request to add Customer" + request.getContext());
+        try{
+          customerManager.AddCustomer(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+
 
 
 
