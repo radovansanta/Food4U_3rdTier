@@ -16,8 +16,7 @@ public class CustomerManager
     try
     {
       Customer customer = gson.fromJson(customerAsJson, Customer.class);
-      //TODO uncomment this once the DAO class impelemnted the method
-      //food4UDAO.addCustomer(customer);
+      food4UDAO.addCustomer(customer);
     }
     catch (Exception e){
       System.out.println(e);

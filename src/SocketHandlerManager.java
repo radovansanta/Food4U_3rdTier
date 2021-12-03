@@ -1,7 +1,6 @@
 import Managers.*;
 import Managers.MenuManager;
 import Managers.RestaurantManager;
-import Managers.UserManager;
 import Models.Request;
 import Models.Restaurant;
 import com.google.gson.Gson;
@@ -13,7 +12,6 @@ import java.net.Socket;
   {
 
     private Socket socket;
-    private UserManager userManager;
     private RestaurantManager restaurantManager;
     private MenuManager menuManager;
     private CategoryManager categoryManager;
@@ -24,11 +22,10 @@ import java.net.Socket;
     private InputStream inFromClient;
     private String message;
 
-    public SocketHandlerManager(Socket socket, UserManager chatManager, RestaurantManager restaurantManager, MenuManager menuManager,
+    public SocketHandlerManager(Socket socket, RestaurantManager restaurantManager, MenuManager menuManager,
         CategoryManager categoryManager, ItemManager itemManager,CustomerManager customerManager)
     {
       this.socket = socket;
-      this.userManager = chatManager;
       this.restaurantManager = restaurantManager;
       this.menuManager = menuManager;
       this.categoryManager = categoryManager;
@@ -57,22 +54,6 @@ import java.net.Socket;
       Request request = new Gson().fromJson(message, Request.class);
       System.out.println(request.getContext());
       System.out.println(request.getType());
-
-
-      // *****USER stuffs*****
-      // Validate User
-      if (request.getType().equals("ValidateUser")){
-        String response = userManager.ValidateUser(request.getContext());
-        byte[] responseAsBytes = response.getBytes();
-        try
-        {
-          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
-        }
-        catch (IOException e)
-        {
-          e.printStackTrace();
-        }
-      }
 
       // *****RESTAURANT stuffs*****
       // Add Restaurant

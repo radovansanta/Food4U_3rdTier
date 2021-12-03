@@ -589,7 +589,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
 
     // TODO: 03.12.2021 test
     @Override
-    public void AddCustomer(Customer customer) {
+    public void addCustomer(Customer customer) {
         try(Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO customer(user_name, password," +
                     "first_name, last_name, phone_number, email, address) VALUES (?,?,?,?,?,?,?)");
@@ -612,9 +612,21 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
 
     }
 
-    // TODO: 03.12.2021 implement+test
+    // TODO: 03.12.2021 test
     @Override
     public Customer getCustomer(String username) {
+        Customer customer = new Customer();
+        try(Connection connection = getConnection()) {
+            PreparedStatement statement = getConnection().prepareStatement("SELECT * FROM customer WHERE user_name = ?");
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next())
+            {
+                customer = getCustomer(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -622,5 +634,29 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
     @Override
     public void deleteCustomer(String username) {
 
+    }
+
+    // TODO: 03.12.2021 test 
+    private Customer getCustomer(ResultSet resultSet){
+        Customer customer = new Customer();
+        try{
+            String userName = resultSet.getString(1);
+            String firstName = resultSet.getString(2);
+            String lastName = resultSet.getString(3);
+            String phoneNumber = resultSet.getString(4);
+            String email = resultSet.getString(5);
+            String address = resultSet.getString(6);
+            String password = resultSet.getString(7);
+            customer.setUsername(userName);
+            customer.setFirstName(firstName);
+            customer.setLastName(lastName);
+            customer.setPhoneNumber(phoneNumber);
+            customer.setEmail(email);
+            customer.setAddress(address);
+            customer.setPassword(password);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return customer;
     }
 }

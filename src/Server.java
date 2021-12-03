@@ -1,7 +1,6 @@
 import Managers.*;
 import Managers.MenuManager;
 import Managers.RestaurantManager;
-import Managers.UserManager;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -42,19 +41,19 @@ public class Server {
 
      */
 
-    private UserManager userManager;
     private RestaurantManager restaurantManager;
     private MenuManager menuManager;
     private CategoryManager categoryManager;
     private ItemManager itemManager;
+    private CustomerManager customerManager;
 
-     public Server(UserManager userManager, RestaurantManager restaurantManager, MenuManager menuManager, CategoryManager categoryManager, ItemManager itemManager) {
-      this.userManager = userManager;
+     public Server(RestaurantManager restaurantManager, MenuManager menuManager, CategoryManager categoryManager,
+                   ItemManager itemManager, CustomerManager customerManager) {
       this.restaurantManager = restaurantManager;
       this.menuManager = menuManager;
       this. categoryManager = categoryManager;
       this.itemManager = itemManager;
-
+      this.customerManager = customerManager;
     }
 
     public void startServer() {
@@ -63,7 +62,7 @@ public class Server {
         while (true) {
           Socket socket = welcomeSocket.accept();
           System.out.println("Accepted");
-          SocketHandlerManager handler = new SocketHandlerManager(socket, userManager, restaurantManager, menuManager, categoryManager,itemManager);
+          SocketHandlerManager handler = new SocketHandlerManager(socket, restaurantManager, menuManager, categoryManager,itemManager, customerManager);
           new Thread(handler).start();
         }
       } catch (IOException e) {
