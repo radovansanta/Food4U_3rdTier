@@ -606,10 +606,37 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         }
     }
 
-    // TODO: 03.12.2021 implement+test
+    // TODO: 03.12.2021 test
     @Override
     public void updateCustomer(Customer customer) {
-
+        try(Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("UPDATE customer SET password = ? WHERE user_name = ?");
+            statement.setString(1, customer.getPassword());
+            statement.setString(2, customer.getUsername());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE customer SET first_name = ? WHERE user_name = ?");
+            statement.setString(1, customer.getFirstName());
+            statement.setString(2, customer.getUsername());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE customer SET last_name = ? WHERE user_name = ?");
+            statement.setString(1, customer.getLastName());
+            statement.setString(2, customer.getUsername());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE customer SET address = ? WHERE user_name = ?");
+            statement.setString(1, customer.getAddress());
+            statement.setString(2, customer.getUsername());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE customer SET phone_number = ? WHERE user_name = ?");
+            statement.setString(1, customer.getPhoneNumber());
+            statement.setString(2, customer.getUsername());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE customer SET email = ? WHERE user_name = ?");
+            statement.setString(1, customer.getEmail());
+            statement.setString(2, customer.getUsername());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // TODO: 03.12.2021 test
