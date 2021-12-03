@@ -627,7 +627,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return customer;
     }
 
     // TODO: 03.12.2021 implement+test
@@ -636,7 +636,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
 
     }
 
-    // TODO: 03.12.2021 test 
+    // TODO: 03.12.2021 test
     private Customer getCustomer(ResultSet resultSet){
         Customer customer = new Customer();
         try{
