@@ -5,7 +5,7 @@ import Models.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, ManageMenus, ManageCategories, ManageItems
+public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, ManageMenus, ManageCategories, ManageItems, ManageCustomers
 {
 
     private static Food4UDAO instance;
@@ -585,5 +585,42 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             e.printStackTrace();
         }
         return item;
+    }
+
+    // TODO: 03.12.2021 test
+    @Override
+    public void AddCustomer(Customer customer) {
+        try(Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO customer(user_name, password," +
+                    "first_name, last_name, phone_number, email, address) VALUES (?,?,?,?,?,?,?)");
+            statement.setString(1, customer.getUsername());
+            statement.setString(2, customer.getPassword());
+            statement.setString(3, customer.getFirstName());
+            statement.setString(4, customer.getLastName());
+            statement.setString(5, customer.getPhoneNumber());
+            statement.setString(6, customer.getEmail());
+            statement.setString(7, customer.getAddress());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // TODO: 03.12.2021 implement+test
+    @Override
+    public void updateCustomer(Customer customer) {
+
+    }
+
+    // TODO: 03.12.2021 implement+test
+    @Override
+    public Customer getCustomer(String username) {
+        return null;
+    }
+
+    // TODO: 03.12.2021 implement+test
+    @Override
+    public void deleteCustomer(String username) {
+
     }
 }
