@@ -16,6 +16,7 @@ public class Restaurant extends User {
     private DeliveryOption deliveryOption1;
     private DeliveryOption deliveryOption2;
     private Menu menu;
+    private boolean visibility;
 
     public Restaurant(){
         super(null,null);
@@ -33,11 +34,12 @@ public class Restaurant extends User {
         deliveryOption1 = null;
         deliveryOption2 = null;
         menu = null;
+        visibility = false;
     }
 
     public Restaurant(String username, String password, String name, String address, String phoneNumber,
                       String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday,
-                      String description) {
+                      String description, boolean visibility) {
         super(username, password);
         this.name = name;
         this.address = address;
@@ -50,6 +52,7 @@ public class Restaurant extends User {
         this.openingHoursSaturday = saturday;
         this.openingHoursSunday = sunday;
         this.description = description;
+        this.visibility = visibility;
     }
 
     public Menu getMenu() {
@@ -108,6 +111,8 @@ public class Restaurant extends User {
         return phoneNumber;
     }
 
+    public boolean getVisibility() {return visibility;}
+
     public void setMenu(Menu menu) {
         this.menu = menu;
     }
@@ -164,6 +169,11 @@ public class Restaurant extends User {
         this.openingHoursSunday = openingHoursSunday;
     }
 
+    public void setVisibility(boolean visibility)
+    {
+        this.visibility = visibility;
+    }
+
     @Override
     public String toString() {
         return super.toString() +
@@ -182,6 +192,7 @@ public class Restaurant extends User {
                 ", deliveryOption1=" + deliveryOption1 +
                 ", deliveryOption2=" + deliveryOption2 +
                 ", menu=" + menu +
+                ", visibility=" + visibility +
                 '}';
     }
 }
