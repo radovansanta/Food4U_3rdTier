@@ -271,6 +271,20 @@ import java.net.Socket;
         }
       }
 
+      // Update Customer
+      if (request.getType().equals("UpdateCustomer"))
+      {
+        System.out.println("I got a request to update Customer" + request.getContext());
+      }
+      try
+      {
+        customerManager.UpdateCustomer(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
 
 
 

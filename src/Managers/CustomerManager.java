@@ -34,4 +34,14 @@ public class CustomerManager
       return null;
     }
   }
+
+  public void UpdateCustomer(String customerAsJson){
+    try{
+      Customer customer = gson.fromJson(customerAsJson, Customer.class);
+      food4UDAO.updateCustomer(customer);
+    }
+    catch (Exception e){
+      System.out.println(e);
+    }
+  }
 }
