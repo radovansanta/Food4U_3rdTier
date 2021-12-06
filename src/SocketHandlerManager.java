@@ -285,6 +285,20 @@ import java.net.Socket;
         System.out.println(e);
       }
 
+      // Delete Customer
+      if (request.getType().equals("DeleteCustomer"))
+      {
+        System.out.println("I got a request to delete Customer" + request.getContext());
+      }
+      try
+      {
+        customerManager.deleteCustomer(request.getContext());
+      }
+      catch (Exception e)
+      {
+        System.out.println(e);
+      }
+
 
 
 
