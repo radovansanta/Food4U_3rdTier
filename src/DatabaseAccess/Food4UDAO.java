@@ -657,10 +657,16 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         return customer;
     }
 
-    // TODO: 03.12.2021 implement+test
+    // TODO: 03.12.2021 test
     @Override
     public void deleteCustomer(String username) {
-
+        try(Connection connection = getConnection()) {
+            PreparedStatement statement = getConnection().prepareStatement("DELETE FROM customer WHERE username = ?");
+            statement.setString(1, username);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // TODO: 03.12.2021 test
