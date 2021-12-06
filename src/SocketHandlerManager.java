@@ -149,115 +149,128 @@ import java.net.Socket;
       if (request.getType().equals("AddMenu"))
       {
         System.out.println("I got a request to add Menu" + request.getContext());
-      }
-      try
-      {
-        menuManager.AddMenu(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
+
+        try
+        {
+          menuManager.AddMenu(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
 
       // Update Menu
       if (request.getType().equals("UpdateMenu"))
       {
         System.out.println("I got a request to update Menu" + request.getContext());
+
+        try
+        {
+          menuManager.updateMenu(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
-      try
-      {
-        menuManager.updateMenu(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
-      }
+
 
       // *****Category stuffs*****
       // Add Category
       if (request.getType().equals("AddCategory"))
       {
         System.out.println("I got a request to add Category" + request.getContext());
-      }
-      try
-      {
-        categoryManager.addCategory(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
+
+        try
+        {
+          categoryManager.addCategory(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
 
       // Update Category
       if (request.getType().equals("UpdateCategory"))
       {
         System.out.println("I got a request to update Category" + request.getContext());
+
+        try
+        {
+          categoryManager.updateCategory(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
-      try
-      {
-        categoryManager.updateCategory(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
-      }
+
 
 // Delete Category
       if (request.getType().equals("DeleteCategory"))
       {
         System.out.println("I got a request to delete Category" + request.getContext());
+
+        try
+        {
+          categoryManager.deleteCategory(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
-      try
-      {
-        categoryManager.deleteCategory(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
-      }
+
 
       // *****Item stuffs*****
       // Add Item
       if (request.getType().equals("AddItem"))
       {
         System.out.println("I got a request to add Item" + request.getContext());
+
+        try
+        {
+          itemManager.addItem(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
-      try
-      {
-        itemManager.addItem(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
-      }
+
 
       // Update Item
       if (request.getType().equals("UpdateItem"))
       {
         System.out.println("I got a request to update Item" + request.getContext());
-      }
-      try
-      {
-        itemManager.updateItem(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
+
+        try
+        {
+          itemManager.updateItem(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
 
       // Delete Item
       if (request.getType().equals("DeleteItem"))
       {
         System.out.println("I got a request to delete Item" + request.getContext());
+
+        try
+        {
+          itemManager.deleteItem(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
-      try
-      {
-        itemManager.deleteItem(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
-      }
+
 
       // *****CUSTOMER stuffs*****
       // Add Customer
@@ -286,36 +299,51 @@ import java.net.Socket;
         }
       }
 
+      // Validate Customer
+      if (request.getType().equals("ValidateCustomer")){
+        System.out.println("I got a request to validate Customer" + request.getContext());
+        String response = customerManager.GetCustomer(request.getContext());
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
       // Update Customer
       if (request.getType().equals("UpdateCustomer"))
       {
         System.out.println("I got a request to update Customer" + request.getContext());
+
+        try
+        {
+          customerManager.UpdateCustomer(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
       }
-      try
-      {
-        customerManager.UpdateCustomer(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
-      }
+
 
       // Delete Customer
       if (request.getType().equals("DeleteCustomer"))
       {
         System.out.println("I got a request to delete Customer" + request.getContext());
-      }
-      try
-      {
-        customerManager.deleteCustomer(request.getContext());
-      }
-      catch (Exception e)
-      {
-        System.out.println(e);
-      }
 
-
-
+        try
+        {
+          customerManager.deleteCustomer(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
+      }
 
 
     }
