@@ -2,8 +2,10 @@ package Managers;
 
 import DatabaseAccess.Food4UDAO;
 import Models.Customer;
+import Models.Item;
 import Models.Restaurant;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 public class CustomerManager
 {
@@ -44,4 +46,14 @@ public class CustomerManager
       System.out.println(e);
     }
   }
+
+  public void deleteCustomer(String customerAsJson){
+    try{
+      Customer customer = gson.fromJson(customerAsJson, Customer.class);
+      food4UDAO.deleteCustomer(customer.getUsername());
+    } catch (JsonSyntaxException e) {
+      e.printStackTrace();
+    }
+  }
+
 }
