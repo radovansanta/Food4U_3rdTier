@@ -62,4 +62,15 @@ public class RestaurantManager
       System.out.println(e);
     }
   }
+
+  public String GetRestaurants(){
+    try
+    {
+      return gson.toJson(food4UDAO.getRestaurants());
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
+    }
+  }
 }

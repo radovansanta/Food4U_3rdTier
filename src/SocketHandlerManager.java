@@ -129,6 +129,21 @@ import java.net.Socket;
         }
       }
 
+      // Get Restaurants
+      if (request.getType().equals("GetRestaurants")){
+        System.out.println("I got a request to get all Restaurants");
+        String response = restaurantManager.GetRestaurants();
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
       // *****MENU stuffs*****
       // Add Menu
       if (request.getType().equals("AddMenu"))
