@@ -34,11 +34,11 @@ public class CategoryManager {
 
     }
 
-    public void RemoveCategory(String categoryName)
+    public void RemoveCategory(int categoryID)
     {
         try
         {
-            food4UDAO.deleteCategory(categoryName);
+            food4UDAO.deleteCategory(categoryID);
         }
         catch (Exception e)
         {

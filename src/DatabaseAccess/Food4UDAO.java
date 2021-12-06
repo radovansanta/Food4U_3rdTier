@@ -425,11 +425,11 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
 
     // TODO: 01.12.2021 test
     @Override
-    public Category getCategory(String categoryName) {
+    public Category getCategory(int categoryID) {
         Category category = new Category();
         try(Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE name = ?");
-            statement.setString(1, categoryName);
+            statement.setInt(1, categoryID);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next())
             {
@@ -443,10 +443,10 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
 
     // TODO: 01.12.2021 test
     @Override
-    public void deleteCategory(String categoryName) {
+    public void deleteCategory(int categoryID){
         try(Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM category WHERE name = ?");
-            statement.setString(1, categoryName);
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM category WHERE category_id = ?");
+            statement.setInt(1, categoryID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -454,11 +454,11 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
 
     // TODO: 06.12.2021 test
     @Override
-    public void updateCategory(Category oldCategory, Category newCategory) {
+    public void updateCategory(Category category) {
         try(Connection connection = getConnection()) {
-            PreparedStatement statement = getConnection().prepareStatement("UPDATE category SET name = ? WHERE name = ?");
-            statement.setString(1, newCategory.getName());
-            statement.setString(2, oldCategory.getName());
+            PreparedStatement statement = getConnection().prepareStatement("UPDATE category SET name = ? WHERE category_id = ?");
+            statement.setString(1, category.getName());
+            statement.setInt(2, category.getCategoryID());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -486,8 +486,9 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
     private Category getCategory(ResultSet resultSet){
         Category category = new Category();
         try{
-            String name = resultSet.getString(1);
-            int menuID = resultSet.getInt(2);
+            int categoryID = resultSet.getInt(1);
+            String name = resultSet.getString(2);
+            int menuID = resultSet.getInt(3);
             category.setName(name);
             category.setMenuId(menuID);
         } catch (SQLException e) {
