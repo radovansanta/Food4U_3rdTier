@@ -489,6 +489,7 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
             int categoryID = resultSet.getInt(1);
             String name = resultSet.getString(2);
             int menuID = resultSet.getInt(3);
+            category.setCategoryID(categoryID);
             category.setName(name);
             category.setMenuId(menuID);
         } catch (SQLException e) {
