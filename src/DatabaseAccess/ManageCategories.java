@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public interface ManageCategories {
     void addCategory(Category category);
-    Category getCategoryByCategoryName(String categoryName);
+    Category getCategory(String categoryName);
     void deleteCategory(String categoryName);
-    void updateCategory(Category category);
+    void updateCategory(Category oldCategory, Category newCategory);
     ArrayList<Category> getCategoriesByMenuID(int menuID);
 }

@@ -23,8 +23,9 @@ public class CategoryManager {
     public void updateCategory(String categoryAsJson) {
         System.out.println(categoryAsJson);
         try {
+            // TODO: 06.12.2021 this need to be modified to support two objects (oldCategory and newCategory)
             Category category = gson.fromJson(categoryAsJson, Category.class);
-            food4UDAO.updateCategory(category);
+            //food4UDAO.updateCategory(category);
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }

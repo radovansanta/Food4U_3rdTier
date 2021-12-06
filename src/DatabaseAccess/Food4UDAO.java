@@ -5,7 +5,7 @@ import Models.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, ManageMenus, ManageCategories, ManageItems, ManageCustomers
+public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, ManageMenus, ManageCategories, ManageItems, ManageCustomers
 {
 
     private static Food4UDAO instance;
@@ -65,8 +65,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             e.printStackTrace();
         }
     }
-
-    // TODO: 01.12.2021 test
+    
     @Override
     public Restaurant getRestaurant(String username) {
         Restaurant restaurant = new Restaurant();
@@ -157,8 +156,23 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             e.printStackTrace();
         }
     }
-
-    // TODO: 01.12.2021  test
+    
+    @Override
+    public ArrayList<Restaurant> getRestaurants() {
+        ArrayList<Restaurant> restaurants = new ArrayList<>();
+        try(Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM restaurant WHERE visibility = true");
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next())
+            {
+                restaurants.add(getRestaurant(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return restaurants;
+    }
+    
     private Restaurant getRestaurant(ResultSet resultSet) {
         Restaurant restaurant = new Restaurant();
         try {
@@ -224,8 +238,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             e.printStackTrace();
         }
     }
-
-    // TODO: 01.12.2021 test
+    
     @Override
     public ArrayList<DeliveryOption> getDeliveryOptionsByUsername(String username) {
         ArrayList<DeliveryOption> deliveryOptions = new ArrayList<>();
@@ -293,7 +306,6 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         }
     }
 
-    // TODO: 01.12.2021 test
     private DeliveryOption getDeliveryOption(ResultSet resultSet) {
         DeliveryOption deliveryOption = new DeliveryOption();
         try {
@@ -338,7 +350,6 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         }
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public Menu getMenuByRestaurant(String username) {
         Menu menu = new Menu();
@@ -383,8 +394,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
             e.printStackTrace();
         }
     }
-
-    // TODO: 01.12.2021 test
+    
     private Menu getMenu(ResultSet resultSet){
         Menu menu = new Menu();
         try{
@@ -415,7 +425,7 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
 
     // TODO: 01.12.2021 test
     @Override
-    public Category getCategoryByCategoryName(String categoryName) {
+    public Category getCategory(String categoryName) {
         Category category = new Category();
         try(Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE name = ?");
@@ -442,9 +452,17 @@ public class Food4UDAO implements ManageRestaurants,ManageDeliveryOptions, Manag
         }
     }
 
+    // TODO: 06.12.2021 test
     @Override
-    public void updateCategory(Category category) {
-
+    public void updateCategory(Category oldCategory, Category newCategory) {
+        try(Connection connection = getConnection()) {
+            PreparedStatement statement = getConnection().prepareStatement("UPDATE category SET name = ? WHERE name = ?");
+            statement.setString(1, newCategory.getName());
+            statement.setString(2, oldCategory.getName());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     // TODO: 01.12.2021 test
