@@ -360,6 +360,17 @@ import java.net.Socket;
         }
       }
 
+      //Get incoming orders
+      if (request.getType().equals("GetIncomingOrders")){
+        System.out.println("I got a request to get incoming orders" + request.getContext());
+        try{
+          orderManager.getIncomingOrders(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
 
     }
   }
