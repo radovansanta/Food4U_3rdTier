@@ -1,6 +1,7 @@
 import Managers.*;
 import Managers.MenuManager;
 import Managers.RestaurantManager;
+import Models.Order;
 import Models.Request;
 import Models.Restaurant;
 import com.google.gson.Gson;
@@ -17,13 +18,14 @@ import java.net.Socket;
     private CategoryManager categoryManager;
     private ItemManager itemManager;
     private CustomerManager customerManager;
+    private OrderManager orderManager;
 
     private OutputStream outToClient;
     private InputStream inFromClient;
     private String message;
 
     public SocketHandlerManager(Socket socket, RestaurantManager restaurantManager, MenuManager menuManager,
-        CategoryManager categoryManager, ItemManager itemManager,CustomerManager customerManager)
+        CategoryManager categoryManager, ItemManager itemManager,CustomerManager customerManager, OrderManager orderManager)
     {
       this.socket = socket;
       this.restaurantManager = restaurantManager;
@@ -31,6 +33,7 @@ import java.net.Socket;
       this.categoryManager = categoryManager;
       this.itemManager = itemManager;
       this.customerManager = customerManager;
+      this.orderManager=orderManager;
 
       try
       {
@@ -341,6 +344,18 @@ import java.net.Socket;
         }
         catch (Exception e)
         {
+          System.out.println(e);
+        }
+      }
+
+      // *****ORDER stuff*****
+      // Add order
+      if (request.getType().equals("AddOrder")){
+        System.out.println("I got a request to add Order" + request.getContext());
+        try{
+          orderManager.addOrder(request.getContext());
+        }
+        catch (Exception e){
           System.out.println(e);
         }
       }
