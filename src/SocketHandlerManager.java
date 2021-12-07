@@ -145,6 +145,19 @@ import java.net.Socket;
         {
           e.printStackTrace();
         }
+
+        // Accept order
+        if (request.getType().equals("AcceptOrder")){
+          System.out.println("I got a request to accept an order" + request.getContext());
+
+          try
+          {
+            restaurantManager.AcceptOrder(request.getContext());
+          }
+          catch (Exception e){
+            System.out.println(e);
+          }
+        }
       }
 
       // *****MENU stuffs*****
@@ -370,6 +383,7 @@ import java.net.Socket;
           System.out.println(e);
         }
       }
+
 
 
     }

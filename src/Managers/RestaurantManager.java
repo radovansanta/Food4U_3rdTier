@@ -1,6 +1,7 @@
 package Managers;
 
 import DatabaseAccess.Food4UDAO;
+import Models.Order;
 import Models.Restaurant;
 import com.google.gson.Gson;
 
@@ -71,6 +72,18 @@ public class RestaurantManager
     catch (Exception e){
       System.out.println(e);
       return null;
+    }
+  }
+
+  public void AcceptOrder(String orderId)
+  {
+    try
+    {
+      // gson.toJson(food4UDAO.acceptOrders());
+    }
+    catch (Exception e)
+    {
+      System.out.println(e);
     }
   }
 }
