@@ -15,7 +15,7 @@ public class OrderManager
     try
     {
       Order order = gson.fromJson(orderAsJson, Order.class);
-      //food4UDAO.addOrder(order);
+      food4UDAO.addOrder(order);
     }
     catch (Exception e)
     {
