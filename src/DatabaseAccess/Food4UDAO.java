@@ -5,7 +5,8 @@ import Models.*;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, ManageMenus, ManageCategories, ManageItems, ManageCustomers
+public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, ManageMenus, ManageCategories, ManageItems,
+        ManageCustomers, ManageOrders
 {
 
     private static Food4UDAO instance;
@@ -713,4 +714,22 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
         return customer;
     }
 
+    // TODO: 07.12.2021 test
+    @Override
+    public void addOrder(Order order) {
+        try(Connection connection = getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO purchase(address, comment, " +
+                    "customer_username, total_price, date, restaurant_username, delivery_option) VALUES (?,?,?,?,?,?,?)");
+            statement.setString(1, order.getAddress());
+            statement.setString(2, order.getComment());
+            statement.setString(3, order.getCustomerUsername());
+            statement.setDouble(4, order.getPrice());
+            statement.setString(5, order.getDate());
+            statement.setString(6, order.getRestaurantUsername());
+            statement.setInt(7, order.getDeliveryID());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
