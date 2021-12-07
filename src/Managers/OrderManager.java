@@ -27,7 +27,8 @@ public class OrderManager
   {
     try
     {
-      return gson.toJson(food4UDAO.getIncomingOrders(restaurantUsername));
+      return null;
+      //return gson.toJson(food4UDAO.getIncomingOrders(restaurantUsername));
     }
     catch (Exception e){
       System.out.println(e);
