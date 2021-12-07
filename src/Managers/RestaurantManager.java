@@ -86,4 +86,16 @@ public class RestaurantManager
       System.out.println(e);
     }
   }
+
+  public void DeclineOrder(String orderId)
+  {
+    try
+    {
+      // gson.toJson(food4UDAO.declineOrders());
+    }
+    catch (Exception e)
+    {
+      System.out.println(e);
+    }
+  }
 }

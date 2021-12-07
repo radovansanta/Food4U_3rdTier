@@ -158,6 +158,19 @@ import java.net.Socket;
             System.out.println(e);
           }
         }
+
+        // Decline order
+        if (request.getType().equals("DeclineOrder")){
+          System.out.println("I got a request to accept an order" + request.getContext());
+
+          try
+          {
+            restaurantManager.DeclineOrder(request.getContext());
+          }
+          catch (Exception e){
+            System.out.println(e);
+          }
+        }
       }
 
       // *****MENU stuffs*****
