@@ -10,6 +10,6 @@ public interface ManageItems {
     Item getItemByItemID(int itemID);
     void updateItem(Item item);
     void deleteItem(int itemID);
-    ArrayList<Item> getItemsByCategoryName(String categoryName);
+    ArrayList<Item> getItemsByCategoryId(int categoryId);
 
 }

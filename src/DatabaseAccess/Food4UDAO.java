@@ -582,11 +582,11 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
 
     // TODO: 01.12.2021 test 
     @Override
-    public ArrayList<Item> getItemsByCategoryName(String categoryName) {
+    public ArrayList<Item> getItemsByCategoryId(int categoryId) {
         ArrayList<Item> items = new ArrayList<>();
         try(Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM item WHERE category_name = ?");
-            statement.setString(1, categoryName);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM item WHERE category_id = ?");
+            statement.setInt(1, categoryId);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 items.add(getItem(resultSet));

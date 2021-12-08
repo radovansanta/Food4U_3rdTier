@@ -22,6 +22,16 @@ public class ItemManager {
         }
     }
 
+    public String getItems(String categoryId){
+        try{
+            return gson.toJson(food4UDAO.getItemsByCategoryId(
+                Integer.parseInt(categoryId)));
+        } catch (JsonSyntaxException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     public void updateItem(String itemAsJson)
     {
         System.out.println(itemAsJson);
