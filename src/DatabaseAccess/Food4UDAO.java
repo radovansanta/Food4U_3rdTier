@@ -173,7 +173,17 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
         }
         return restaurants;
     }
-    
+
+    @Override public void acceptOrder(Order order)
+    {
+
+    }
+
+    @Override public void declineOrder(Order order)
+    {
+
+    }
+
     private Restaurant getRestaurant(ResultSet resultSet) {
         Restaurant restaurant = new Restaurant();
         try {
@@ -429,7 +439,7 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
     public Category getCategory(int categoryID) {
         Category category = new Category();
         try(Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE name = ?");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE category_id = ?");
             statement.setInt(1, categoryID);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next())
@@ -487,8 +497,8 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
     private Category getCategory(ResultSet resultSet){
         Category category = new Category();
         try{
-            int categoryID = resultSet.getInt(1);
-            String name = resultSet.getString(2);
+            String name = resultSet.getString(1);
+            int categoryID = resultSet.getInt(2);
             int menuID = resultSet.getInt(3);
             category.setCategoryID(categoryID);
             category.setName(name);
