@@ -36,7 +36,7 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
         try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO restaurant(user_name, password, name," +
                     "address, phone_number, monday, tuesday, wednesday, thursday, friday, saturday, sunday," +
-                    " description, visibility) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                    " description, visibility) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             statement.setString(1, restaurant.getUsername());
             statement.setString(2, restaurant.getPassword());
             statement.setString(3, restaurant.getName());
