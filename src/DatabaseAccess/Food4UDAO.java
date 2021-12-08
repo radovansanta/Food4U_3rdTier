@@ -506,6 +506,7 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println(category.toString());
         return category;
     }
 
@@ -518,7 +519,7 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
             statement.setString(1, item.getName());
             statement.setString(2, item.getDescription());
             statement.setDouble(3, item.getPrice());
-            statement.setString(4, item.getCategoryName());
+            statement.setInt(4, item.getCategoryId());
             statement.setInt(5, item.getDiscount());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -605,13 +606,14 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
             String name = resultSet.getString(2);
             String description = resultSet.getString(3);
             double price = resultSet.getDouble(4);
-            String categoryName = resultSet.getString(5);
+            int categoryId = resultSet.getInt(5);
             int discount = resultSet.getInt(6);
             item.setItemID(itemID);
             item.setName(name);
             item.setPrice(price);
             item.setDescription(description);
-            item.setCategoryName(categoryName);
+            item.setCategoryId(categoryId);
+            item.setDiscount(discount);
         } catch (SQLException e) {
             e.printStackTrace();
         }
