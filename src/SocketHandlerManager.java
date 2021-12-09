@@ -514,6 +514,17 @@ import java.net.Socket;
         }
       }
 
+      //Get accepted orders
+      if (request.getType().equals("GetAcceptedOrders")){
+        System.out.println("I got a request to get accepted orders" + request.getContext());
+        try{
+          orderManager.getAcceptedOrders(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
 
 
     }
