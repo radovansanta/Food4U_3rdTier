@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.ArrayList;
+
 public class Order {
 
     private int orderID;
@@ -11,6 +13,7 @@ public class Order {
     private String customerUsername;
     private String restaurantUsername;
     private int deliveryID;
+    private ArrayList<Item> items;
 
     public Order() {
         orderID = 0;
@@ -22,6 +25,7 @@ public class Order {
         customerUsername = null;
         restaurantUsername = null;
         deliveryID = 0;
+        items = new ArrayList<>();
     }
 
     public Order(int orderID, String comment, String address, double price, String date, String status,
@@ -73,6 +77,10 @@ public class Order {
         this.restaurantUsername = restaurantUsername;
     }
 
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
+    }
+
     public int getOrderID() {
         return orderID;
     }
@@ -107,6 +115,10 @@ public class Order {
 
     public String getStatus() {
         return status;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     @Override
