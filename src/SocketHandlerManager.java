@@ -120,7 +120,7 @@ import java.net.Socket;
       }
 
       // Delete Restaurant
-      if (request.getType().equals("RemoveRestaurant"))
+      if (request.getType().equals("DeleteRestaurant"))
       {
         System.out.println("I got a request to remove a Restaurant" + request.getContext());
         try
@@ -369,15 +369,27 @@ import java.net.Socket;
       if (request.getType().equals("DeleteItem"))
       {
         System.out.println("I got a request to delete Item" + request.getContext());
-
+        /*
         try
         {
+          //TODO Missing GetItem Api - noticed 9.12 01:19
+          String response = itemManager.GetItem(request.getContext());
           itemManager.deleteItem(request.getContext());
+          byte[] responseAsBytes = response.getBytes();
+          try
+          {
+            outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+          }
+          catch (IOException e)
+          {
+            e.printStackTrace();
+          }
         }
         catch (Exception e)
         {
           System.out.println(e);
         }
+         */
       }
 
 
@@ -443,10 +455,19 @@ import java.net.Socket;
       if (request.getType().equals("DeleteCustomer"))
       {
         System.out.println("I got a request to delete Customer" + request.getContext());
-
         try
         {
+          String response = customerManager.GetCustomer(request.getContext());
           customerManager.deleteCustomer(request.getContext());
+          byte[] responseAsBytes = response.getBytes();
+          try
+          {
+            outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+          }
+          catch (IOException e)
+          {
+            e.printStackTrace();
+          }
         }
         catch (Exception e)
         {

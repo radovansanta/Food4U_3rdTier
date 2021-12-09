@@ -27,7 +27,7 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=food4u",
-                "postgres", "maria5561");
+                "postgres", "SR1835RS");
     }
 
     // TODO: 01.12.2021 test
@@ -694,7 +694,7 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
     @Override
     public void deleteCustomer(String username) {
         try(Connection connection = getConnection()) {
-            PreparedStatement statement = getConnection().prepareStatement("DELETE FROM customer WHERE username = ?");
+            PreparedStatement statement = getConnection().prepareStatement("DELETE FROM customer WHERE user_name = ?");
             statement.setString(1, username);
             statement.executeUpdate();
         } catch (SQLException e) {

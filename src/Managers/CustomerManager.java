@@ -47,10 +47,9 @@ public class CustomerManager
     }
   }
 
-  public void deleteCustomer(String customerAsJson){
+  public void deleteCustomer(String username){
     try{
-      Customer customer = gson.fromJson(customerAsJson, Customer.class);
-      food4UDAO.deleteCustomer(customer.getUsername());
+      food4UDAO.deleteCustomer(username);
     } catch (JsonSyntaxException e) {
       e.printStackTrace();
     }

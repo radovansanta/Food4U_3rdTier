@@ -43,11 +43,9 @@ public class ItemManager {
         }
     }
 
-    public void deleteItem(String itemAsJson){
-        System.out.println(itemAsJson);
+    public void deleteItem(String itemId){
         try{
-            Item item = gson.fromJson(itemAsJson, Item.class);
-            food4UDAO.deleteItem(item.getItemID());
+            food4UDAO.deleteItem(Integer.parseInt(itemId));
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
