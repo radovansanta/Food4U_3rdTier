@@ -27,7 +27,7 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
 
     private Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=food4u",
-                "postgres", "SR1835RS");
+                "postgres", "maria5561");
     }
 
     // TODO: 01.12.2021 test
