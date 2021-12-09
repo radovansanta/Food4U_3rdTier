@@ -20,6 +20,26 @@ public class CategoryManager {
         }
     }
 
+    public String getCategory(String categoryId){
+        try{
+            return gson.toJson(food4UDAO.getCategory(
+                Integer.parseInt(categoryId)));
+        } catch (JsonSyntaxException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public String getCategories(String menuId){
+        try{
+            return gson.toJson(food4UDAO.getCategoriesByMenuID(
+                Integer.parseInt(menuId)));
+        } catch (JsonSyntaxException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     public void updateCategory(String categoryAsJson) {
         System.out.println(categoryAsJson);
         try {

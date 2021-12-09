@@ -1,12 +1,12 @@
 package Models;
 
 public class Category {
-    private int categoryID;
+    private int categoryId;
     private String name;
     private int menuId;
 
     public Category() {
-        categoryID = 0;
+        categoryId = 0;
         name = null;
         menuId = 0;
     }
@@ -20,7 +20,7 @@ public class Category {
     }
 
     public void setCategoryID(int categoryID) {
-        this.categoryID = categoryID;
+        this.categoryId = categoryID;
     }
 
     public String getName() {
@@ -32,13 +32,13 @@ public class Category {
     }
 
     public int getCategoryID() {
-        return categoryID;
+        return categoryId;
     }
 
     @Override
     public String toString() {
         return "Category{" +
-                "categoryID=" + categoryID +
+                "categoryId=" + categoryId +
                 ", name='" + name + '\'' +
                 ", menuId=" + menuId +
                 '}';

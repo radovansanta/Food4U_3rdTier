@@ -25,6 +25,17 @@ public class MenuManager
     }
   }
 
+  public String GetMenu(String menuId){
+    try
+    {
+      return gson.toJson(food4UDAO.getMenu(Integer.parseInt(menuId)));
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
+    }
+  }
+
   public void updateMenu(String menuAsJson)
   {
     System.out.println(menuAsJson);

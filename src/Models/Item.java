@@ -5,7 +5,7 @@ public class Item {
     private String name;
     private String description;
     private double price;
-    private String categoryName;
+    private int categoryId;
     private int discount;
 
     public Item(){
@@ -13,17 +13,17 @@ public class Item {
         name = null;
         description = null;
         price = 0;
-        categoryName = null;
+        categoryId = 0;
         discount = 0;
     }
 
-    public Item(int itemID, String name, String description, double price, String categoryName, int discount)
+    public Item(int itemID, String name, String description, double price, int categoryId, int discount)
     {
         this.itemID = itemID;
         this.name = name;
         this.description = description;
         this.price = price;
-        this.categoryName = categoryName;
+        this.categoryId = categoryId;
         this.discount = discount;
     }
 
@@ -43,8 +43,8 @@ public class Item {
         this.itemID = itemID;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public void setDiscount ( int discount) {this.discount = discount;}
@@ -65,8 +65,8 @@ public class Item {
         return itemID;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public int getCategoryId() {
+        return categoryId;
     }
 
     public int getDiscount() {return discount;}
@@ -78,7 +78,7 @@ public class Item {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", categoryName='" + categoryName + '\'' +
+                ", categoryId='" + categoryId + '\'' +
                 ", discount='" + discount + '\'' +
                 '}';
     }
