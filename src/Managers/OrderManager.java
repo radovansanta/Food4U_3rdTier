@@ -49,4 +49,18 @@ public class OrderManager
     }
   }
 
+  //TODO getPreviousOrders
+  public String getPreviousOrders(String customerUsername)
+  {
+    try
+    {
+      return null;
+      //return gson.toJson(food4UDAO.getPreviousOrders(restaurantUsername));
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
+    }
+  }
+
 }

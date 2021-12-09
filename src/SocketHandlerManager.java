@@ -491,6 +491,8 @@ import java.net.Socket;
         }
       }
 
+
+
       // *****ORDER stuff*****
       // Add order
       if (request.getType().equals("AddOrder")){
@@ -519,6 +521,17 @@ import java.net.Socket;
         System.out.println("I got a request to get accepted orders" + request.getContext());
         try{
           orderManager.getAcceptedOrders(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      // Get previous orders
+      if (request.getType().equals("GetPreviousOrders")){
+        System.out.println("I got a request to get previous orders" + request.getContext());
+        try{
+          orderManager.getPreviousOrders(request.getContext());
         }
         catch (Exception e){
           System.out.println(e);
