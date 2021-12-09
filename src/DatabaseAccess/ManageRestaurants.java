@@ -12,6 +12,4 @@ public interface ManageRestaurants
     void updateRestaurant(Restaurant restaurant);
     void deleteRestaurant(String username);
     ArrayList<Restaurant> getRestaurants();
-    void acceptOrder(Order order);
-    void declineOrder(Order order);
 }

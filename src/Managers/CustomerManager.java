@@ -1,15 +1,13 @@
 package Managers;
 
-import DatabaseAccess.Food4UDAO;
+import DatabaseAccess.ManageCustomers;
 import Models.Customer;
-import Models.Item;
-import Models.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 public class CustomerManager
 {
-  Food4UDAO food4UDAO = Food4UDAO.getInstance();
+  ManageCustomers manageCustomers;
   Gson gson = new Gson();
 
   public void AddCustomer(String customerAsJson)
@@ -18,7 +16,7 @@ public class CustomerManager
     try
     {
       Customer customer = gson.fromJson(customerAsJson, Customer.class);
-      food4UDAO.addCustomer(customer);
+      manageCustomers.addCustomer(customer);
     }
     catch (Exception e){
       System.out.println(e);
@@ -29,7 +27,7 @@ public class CustomerManager
   {
     try
     {
-      return gson.toJson(food4UDAO.getCustomer(username));
+      return gson.toJson(manageCustomers.getCustomer(username));
     }
     catch (Exception e){
       System.out.println(e);
@@ -40,7 +38,7 @@ public class CustomerManager
   public void UpdateCustomer(String customerAsJson){
     try{
       Customer customer = gson.fromJson(customerAsJson, Customer.class);
-      food4UDAO.updateCustomer(customer);
+      manageCustomers.updateCustomer(customer);
     }
     catch (Exception e){
       System.out.println(e);
@@ -49,7 +47,7 @@ public class CustomerManager
 
   public void deleteCustomer(String username){
     try{
-      food4UDAO.deleteCustomer(username);
+      manageCustomers.deleteCustomer(username);
     } catch (JsonSyntaxException e) {
       e.printStackTrace();
     }

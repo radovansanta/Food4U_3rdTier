@@ -174,16 +174,6 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
         return restaurants;
     }
 
-    @Override public void acceptOrder(Order order)
-    {
-
-    }
-
-    @Override public void declineOrder(Order order)
-    {
-
-    }
-
     private Restaurant getRestaurant(ResultSet resultSet) {
         Restaurant restaurant = new Restaurant();
         try {
@@ -761,6 +751,21 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
             e.printStackTrace();
         }
         return orders;
+    }
+
+    @Override
+    public ArrayList<Order> getAcceptedOrders(String restaurantUsername) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Order> getPreviousOrders(String customerUsername) {
+        return null;
+    }
+
+    @Override
+    public void updateOrder(Order order) {
+
     }
 
     private Order getOrder(ResultSet resultSet){

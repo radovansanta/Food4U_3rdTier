@@ -1,9 +1,7 @@
 import Managers.*;
 import Managers.MenuManager;
 import Managers.RestaurantManager;
-import Models.Order;
 import Models.Request;
-import Models.Restaurant;
 import com.google.gson.Gson;
 
 import java.io.*;
@@ -158,36 +156,6 @@ import java.net.Socket;
           e.printStackTrace();
         }
       }
-
-      // Accept order
-      if (request.getType().equals("AcceptOrder"))
-      {
-        System.out.println("I got a request to accept an order" + request.getContext());
-
-        try
-        {
-          restaurantManager.AcceptOrder(request.getContext());
-        }
-        catch (Exception e)
-        {
-          System.out.println(e);
-        }
-      }
-
-
-        // Decline order
-        if (request.getType().equals("DeclineOrder")){
-          System.out.println("I got a request to accept an order" + request.getContext());
-
-          try
-          {
-            restaurantManager.DeclineOrder(request.getContext());
-          }
-          catch (Exception e){
-            System.out.println(e);
-          }
-        }
-
 
       // *****MENU stuffs*****
       // Add Menu
@@ -481,6 +449,17 @@ import java.net.Socket;
         System.out.println("I got a request to add Order" + request.getContext());
         try{
           orderManager.addOrder(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      // Update order
+      if (request.getType().equals("UpdateOrder")){
+        System.out.println("I got a request to update Order" + request.getContext());
+        try{
+          orderManager.updateOrder(request.getContext());
         }
         catch (Exception e){
           System.out.println(e);

@@ -1,13 +1,12 @@
 package Managers;
 
-import DatabaseAccess.Food4UDAO;
-import Models.Order;
+import DatabaseAccess.ManageRestaurants;
 import Models.Restaurant;
 import com.google.gson.Gson;
 
 public class RestaurantManager
 {
-  Food4UDAO food4UDAO = Food4UDAO.getInstance();
+  ManageRestaurants manageRestaurants;
   Gson gson = new Gson();
 
   public void AddRestaurant(String restaurantAsJson){
@@ -15,7 +14,7 @@ public class RestaurantManager
     try
     {
       Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
-      food4UDAO.addRestaurant(restaurant);
+      manageRestaurants.addRestaurant(restaurant);
     }
     catch (Exception e){
       System.out.println(e);
@@ -25,7 +24,7 @@ public class RestaurantManager
   public String GetRestaurant(String username){
     try
     {
-      return gson.toJson(food4UDAO.getRestaurant(username));
+      return gson.toJson(manageRestaurants.getRestaurant(username));
     }
     catch (Exception e){
       System.out.println(e);
@@ -36,7 +35,7 @@ public class RestaurantManager
   public String ValidateLogin(String username){
     try
     {
-      return gson.toJson(food4UDAO.getRestaurant(username));
+      return gson.toJson(manageRestaurants.getRestaurant(username));
     }
     catch (Exception e){
       System.out.println(e);
@@ -48,7 +47,7 @@ public class RestaurantManager
     try{
       Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
       System.out.println("Restaurant object is: "+restaurant);
-      food4UDAO.updateRestaurant(restaurant);
+      manageRestaurants.updateRestaurant(restaurant);
     }
     catch (Exception e){
       System.out.println(e);
@@ -57,7 +56,7 @@ public class RestaurantManager
   public void RemoveRestaurant(String username){
     try
     {
-      food4UDAO.deleteRestaurant(username);
+      manageRestaurants.deleteRestaurant(username);
     }
     catch (Exception e){
       System.out.println(e);
@@ -67,7 +66,7 @@ public class RestaurantManager
   public String GetRestaurants(){
     try
     {
-      return gson.toJson(food4UDAO.getRestaurants());
+      return gson.toJson(manageRestaurants.getRestaurants());
     }
     catch (Exception e){
       System.out.println(e);

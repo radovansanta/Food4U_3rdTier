@@ -1,20 +1,19 @@
 package Managers;
 
-import DatabaseAccess.Food4UDAO;
+import DatabaseAccess.ManageCategories;
 import Models.Category;
-import Models.Menu;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 public class CategoryManager {
-    Food4UDAO food4UDAO = Food4UDAO.getInstance();
+    ManageCategories manageCategories;
     Gson gson = new Gson();
 
     public void addCategory(String categoryAsJson){
         System.out.println(categoryAsJson);
         try{
             Category category = gson.fromJson(categoryAsJson, Category.class);
-            food4UDAO.addCategory(category);
+            manageCategories.addCategory(category);
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
@@ -22,7 +21,7 @@ public class CategoryManager {
 
     public String getCategory(String categoryId){
         try{
-            return gson.toJson(food4UDAO.getCategory(
+            return gson.toJson(manageCategories.getCategory(
                 Integer.parseInt(categoryId)));
         } catch (JsonSyntaxException e) {
             System.out.println(e);
@@ -32,7 +31,7 @@ public class CategoryManager {
 
     public String getCategories(String menuId){
         try{
-            return gson.toJson(food4UDAO.getCategoriesByMenuID(
+            return gson.toJson(manageCategories.getCategoriesByMenuID(
                 Integer.parseInt(menuId)));
         } catch (JsonSyntaxException e) {
             System.out.println(e);
@@ -43,9 +42,8 @@ public class CategoryManager {
     public void updateCategory(String categoryAsJson) {
         System.out.println(categoryAsJson);
         try {
-            // TODO: 06.12.2021 this need to be modified to support two objects (oldCategory and newCategory)
             Category category = gson.fromJson(categoryAsJson, Category.class);
-            //food4UDAO.updateCategory(category);
+            manageCategories.updateCategory(category);
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
@@ -58,7 +56,7 @@ public class CategoryManager {
     {
         try
         {
-            food4UDAO.deleteCategory(categoryID);
+            manageCategories.deleteCategory(categoryID);
         }
         catch (Exception e)
         {

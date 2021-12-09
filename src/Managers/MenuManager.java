@@ -1,14 +1,13 @@
 package Managers;
 
-import DatabaseAccess.Food4UDAO;
+import DatabaseAccess.ManageMenus;
 import Models.Menu;
-import Models.Restaurant;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 public class MenuManager
 {
-  Food4UDAO food4UDAO = Food4UDAO.getInstance();
+  ManageMenus manageMenus;
   Gson gson = new Gson();
 
   public void AddMenu(String menuAsJson)
@@ -17,7 +16,7 @@ public class MenuManager
     try
     {
       Menu menu = gson.fromJson(menuAsJson, Menu.class);
-      food4UDAO.addMenu(menu);
+      manageMenus.addMenu(menu);
     }
     catch (Exception e)
     {
@@ -28,7 +27,7 @@ public class MenuManager
   public String GetMenu(String menuId){
     try
     {
-      return gson.toJson(food4UDAO.getMenu(Integer.parseInt(menuId)));
+      return gson.toJson(manageMenus.getMenu(Integer.parseInt(menuId)));
     }
     catch (Exception e){
       System.out.println(e);
@@ -41,7 +40,7 @@ public class MenuManager
     System.out.println(menuAsJson);
     try{
       Menu menu = gson.fromJson(menuAsJson, Menu.class);
-      food4UDAO.updateMenu(menu);
+      manageMenus.updateMenu(menu);
     } catch (JsonSyntaxException e) {
       e.printStackTrace();
     }

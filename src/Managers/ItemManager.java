@@ -1,14 +1,12 @@
 package Managers;
 
-import DatabaseAccess.Food4UDAO;
-import Models.Category;
+import DatabaseAccess.ManageItems;
 import Models.Item;
-import Models.Menu;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 public class ItemManager {
-    Food4UDAO food4UDAO = Food4UDAO.getInstance();
+    ManageItems manageItems;
     Gson gson = new Gson();
 
     public void addItem(String itemAsJson)
@@ -16,7 +14,7 @@ public class ItemManager {
         System.out.println(itemAsJson);
         try{
             Item item = gson.fromJson(itemAsJson, Item.class);
-            food4UDAO.addItem(item);
+            manageItems.addItem(item);
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
@@ -24,7 +22,7 @@ public class ItemManager {
 
     public String getItems(String categoryId){
         try{
-            return gson.toJson(food4UDAO.getItemsByCategoryId(
+            return gson.toJson(manageItems.getItemsByCategoryId(
                 Integer.parseInt(categoryId)));
         } catch (JsonSyntaxException e) {
             System.out.println(e);
@@ -37,7 +35,7 @@ public class ItemManager {
         System.out.println(itemAsJson);
         try{
             Item item = gson.fromJson(itemAsJson, Item.class);
-            food4UDAO.updateItem(item);
+            manageItems.updateItem(item);
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
@@ -45,7 +43,7 @@ public class ItemManager {
 
     public void deleteItem(String itemId){
         try{
-            food4UDAO.deleteItem(Integer.parseInt(itemId));
+            manageItems.deleteItem(Integer.parseInt(itemId));
         } catch (JsonSyntaxException e) {
             e.printStackTrace();
         }
