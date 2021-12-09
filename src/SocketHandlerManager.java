@@ -349,6 +349,22 @@ import java.net.Socket;
         }
       }
 
+      // Get Item
+      if (request.getType().equals("GetItem"))
+      {
+        System.out.println("I got a request to get Item" + request.getContext());
+        String response = itemManager.getItem(request.getContext());
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
 
       // Update Item
       if (request.getType().equals("UpdateItem"))
