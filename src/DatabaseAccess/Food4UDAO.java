@@ -764,6 +764,11 @@ public class Food4UDAO implements ManageRestaurants, ManageDeliveryOptions, Mana
     }
 
     @Override
+    public ArrayList<Order> getReadyForPickUpOrders() {
+        return null;
+    }
+
+    @Override
     public void updateOrder(Order order) {
 
     }

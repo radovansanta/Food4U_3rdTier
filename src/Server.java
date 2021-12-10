@@ -47,15 +47,17 @@ public class Server {
     private ItemManager itemManager;
     private CustomerManager customerManager;
     private OrderManager orderManager;
+    private DriverManager driverManager;
 
      public Server(RestaurantManager restaurantManager, MenuManager menuManager, CategoryManager categoryManager,
-                   ItemManager itemManager, CustomerManager customerManager,OrderManager orderManager) {
+                   ItemManager itemManager, CustomerManager customerManager,OrderManager orderManager, DriverManager driverManager) {
       this.restaurantManager = restaurantManager;
       this.menuManager = menuManager;
       this. categoryManager = categoryManager;
       this.itemManager = itemManager;
       this.customerManager = customerManager;
       this.orderManager=orderManager;
+      this.driverManager = driverManager;
     }
 
     public void startServer() {
@@ -64,7 +66,8 @@ public class Server {
         while (true) {
           Socket socket = welcomeSocket.accept();
           System.out.println("Accepted");
-          SocketHandlerManager handler = new SocketHandlerManager(socket, restaurantManager, menuManager, categoryManager,itemManager, customerManager,orderManager);
+          SocketHandlerManager handler = new SocketHandlerManager(socket, restaurantManager, menuManager, categoryManager,
+                  itemManager, customerManager,orderManager, driverManager);
           new Thread(handler).start();
         }
       } catch (IOException e) {

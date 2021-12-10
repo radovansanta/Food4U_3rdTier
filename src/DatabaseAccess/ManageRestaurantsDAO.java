@@ -17,6 +17,8 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
     private ManageMenus manageMenus;
     private ManageDeliveryOptions manageDeliveryOptions;
 
+
+
     // TODO: 01.12.2021 test
     @Override
     public void addRestaurant(Restaurant restaurant) {

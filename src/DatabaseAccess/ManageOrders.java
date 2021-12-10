@@ -9,5 +9,6 @@ public interface ManageOrders {
     ArrayList<Order> getIncomingOrders(String restaurantUsername);
     ArrayList<Order> getAcceptedOrders(String restaurantUsername);
     ArrayList<Order> getPreviousOrders(String customerUsername);
+    ArrayList<Order> getReadyForPickUpOrders();
     void updateOrder(Order order);
 }

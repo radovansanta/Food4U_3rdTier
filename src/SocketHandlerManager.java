@@ -9,7 +9,6 @@ import java.net.Socket;
 
   public class SocketHandlerManager implements Runnable
   {
-
     private Socket socket;
     private RestaurantManager restaurantManager;
     private MenuManager menuManager;
@@ -17,13 +16,15 @@ import java.net.Socket;
     private ItemManager itemManager;
     private CustomerManager customerManager;
     private OrderManager orderManager;
+    private DriverManager driverManager;
 
     private OutputStream outToClient;
     private InputStream inFromClient;
     private String message;
 
     public SocketHandlerManager(Socket socket, RestaurantManager restaurantManager, MenuManager menuManager,
-        CategoryManager categoryManager, ItemManager itemManager,CustomerManager customerManager, OrderManager orderManager)
+        CategoryManager categoryManager, ItemManager itemManager,CustomerManager customerManager, OrderManager orderManager,
+                                DriverManager driverManager)
     {
       this.socket = socket;
       this.restaurantManager = restaurantManager;
@@ -32,6 +33,7 @@ import java.net.Socket;
       this.itemManager = itemManager;
       this.customerManager = customerManager;
       this.orderManager=orderManager;
+      this.driverManager = driverManager;
 
       try
       {
@@ -518,6 +520,87 @@ import java.net.Socket;
       }
 
 
+      // *****DRIVER stuffs*****
+      // Add Driver
+      if (request.getType().equals("AddDriver")){
+        System.out.println("I got a request to add Driver" + request.getContext());
+        try{
+          driverManager.addDriver(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      // Get Driver
+      if (request.getType().equals("GetDriver")){
+        System.out.println("I got a request to get Driver" + request.getContext());
+        String response = driverManager.getDriver(request.getContext());
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
+      // Validate Driver
+      if (request.getType().equals("ValidateDriver")){
+        System.out.println("I got a request to validate Driver" + request.getContext());
+        String response = driverManager.getDriver(request.getContext());
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
+      // Update Driver
+      if (request.getType().equals("UpdateDriver"))
+      {
+        System.out.println("I got a request to update Driver" + request.getContext());
+
+        try
+        {
+          driverManager.updateDriver(request.getContext());
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
+      }
+
+
+      // Delete Driver
+      if (request.getType().equals("DeleteDriver"))
+      {
+        System.out.println("I got a request to delete Driver" + request.getContext());
+        try
+        {
+          String response = driverManager.getDriver(request.getContext());
+          driverManager.deleteDriver(request.getContext());
+          byte[] responseAsBytes = response.getBytes();
+          try
+          {
+            outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+          }
+          catch (IOException e)
+          {
+            e.printStackTrace();
+          }
+        }
+        catch (Exception e)
+        {
+          System.out.println(e);
+        }
+      }
 
     }
   }
