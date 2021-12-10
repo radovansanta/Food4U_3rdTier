@@ -22,12 +22,39 @@ public class OrderManager
       System.out.println(e);
     }
   }
-
+    //TODO getIncomingOrders
   public String getIncomingOrders(String restaurantUsername)
   {
     try
     {
       return gson.toJson(manageOrders.getIncomingOrders(restaurantUsername));
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
+    }
+  }
+    //TODO getAcceptedOrders
+  public String getAcceptedOrders(String restaurantUsername)
+  {
+    try
+    {
+      return null;
+      //return gson.toJson(food4UDAO.getAcceptedOrders(restaurantUsername));
+    }
+    catch (Exception e){
+      System.out.println(e);
+      return null;
+    }
+  }
+
+  //TODO getPreviousOrders
+  public String getPreviousOrders(String customerUsername)
+  {
+    try
+    {
+      return null;
+      //return gson.toJson(food4UDAO.getPreviousOrders(restaurantUsername));
     }
     catch (Exception e){
       System.out.println(e);

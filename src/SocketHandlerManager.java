@@ -317,6 +317,22 @@ import java.net.Socket;
         }
       }
 
+      // Get Item
+      if (request.getType().equals("GetItem"))
+      {
+        System.out.println("I got a request to get Item" + request.getContext());
+        String response = itemManager.getItem(request.getContext());
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
 
       // Update Item
       if (request.getType().equals("UpdateItem"))
@@ -443,6 +459,8 @@ import java.net.Socket;
         }
       }
 
+
+
       // *****ORDER stuff*****
       // Add order
       if (request.getType().equals("AddOrder")){
@@ -471,6 +489,28 @@ import java.net.Socket;
         System.out.println("I got a request to get incoming orders" + request.getContext());
         try{
           orderManager.getIncomingOrders(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      //Get accepted orders
+      if (request.getType().equals("GetAcceptedOrders")){
+        System.out.println("I got a request to get accepted orders" + request.getContext());
+        try{
+          orderManager.getAcceptedOrders(request.getContext());
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
+      // Get previous orders
+      if (request.getType().equals("GetPreviousOrders")){
+        System.out.println("I got a request to get previous orders" + request.getContext());
+        try{
+          orderManager.getPreviousOrders(request.getContext());
         }
         catch (Exception e){
           System.out.println(e);

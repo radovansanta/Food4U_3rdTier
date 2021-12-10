@@ -48,4 +48,14 @@ public class ItemManager {
             e.printStackTrace();
         }
     }
+
+    public String getItem(String itemId){
+        try{
+            return gson.toJson(food4UDAO.getItemByItemID(
+                    Integer.parseInt(itemId)));
+        } catch (JsonSyntaxException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
 }
