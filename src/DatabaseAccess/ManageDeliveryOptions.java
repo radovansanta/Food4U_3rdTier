@@ -8,7 +8,7 @@ public interface ManageDeliveryOptions
 {
     void addDeliveryOption(DeliveryOption deliveryOption);
     ArrayList<DeliveryOption> getDeliveryOptionsByUsername(String username);
-    DeliveryOption getDeliveryOption(int deliveryID);
+    DeliveryOption getDeliveryOption(int deliveryId);
     void updateDeliveryOption(DeliveryOption deliveryOption);
-    void deleteDeliveryOption(int deliveryID);
+    void deleteDeliveryOption(int deliveryId);
 }

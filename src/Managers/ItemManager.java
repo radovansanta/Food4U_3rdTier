@@ -51,7 +51,7 @@ public class ItemManager {
 
     public String getItem(String itemId){
         try{
-            return gson.toJson(food4UDAO.getItemByItemID(
+            return gson.toJson(manageItems.getItemByItemId(
                     Integer.parseInt(itemId)));
         } catch (JsonSyntaxException e) {
             System.out.println(e);

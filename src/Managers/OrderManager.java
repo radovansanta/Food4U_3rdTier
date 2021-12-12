@@ -22,7 +22,7 @@ public class OrderManager
       System.out.println(e);
     }
   }
-    //TODO getIncomingOrders
+
   public String getIncomingOrders(String restaurantUsername)
   {
     try
@@ -34,27 +34,24 @@ public class OrderManager
       return null;
     }
   }
-    //TODO getAcceptedOrders
+
   public String getAcceptedOrders(String restaurantUsername)
   {
     try
     {
-      return null;
-      //return gson.toJson(food4UDAO.getAcceptedOrders(restaurantUsername));
+      return gson.toJson(manageOrders.getAcceptedOrders(restaurantUsername));
     }
     catch (Exception e){
       System.out.println(e);
       return null;
     }
   }
-
-  //TODO getPreviousOrders
+  
   public String getPreviousOrders(String customerUsername)
   {
     try
     {
-      return null;
-      //return gson.toJson(food4UDAO.getPreviousOrders(restaurantUsername));
+      return gson.toJson(manageOrders.getPreviousOrders(customerUsername));
     }
     catch (Exception e){
       System.out.println(e);

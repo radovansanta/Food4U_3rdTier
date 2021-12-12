@@ -1,9 +1,7 @@
 package Managers;
 
 import DatabaseAccess.ManageDrivers;
-import DatabaseAccess.ManageRestaurants;
 import Models.Driver;
-import Models.Restaurant;
 import com.google.gson.Gson;
 
 public class DriverManager {

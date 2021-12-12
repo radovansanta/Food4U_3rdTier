@@ -31,7 +31,7 @@ public class CategoryManager {
 
     public String getCategories(String menuId){
         try{
-            return gson.toJson(manageCategories.getCategoriesByMenuID(
+            return gson.toJson(manageCategories.getCategoriesByMenuId(
                 Integer.parseInt(menuId)));
         } catch (JsonSyntaxException e) {
             System.out.println(e);
@@ -48,15 +48,10 @@ public class CategoryManager {
             e.printStackTrace();
         }
     }
-    public void deleteCategory(String categoryAsJson) {
-
-    }
-
-    public void RemoveCategory(int categoryID)
-    {
+    public void deleteCategory(String categoryId) {
         try
         {
-            manageCategories.deleteCategory(categoryID);
+            manageCategories.deleteCategory(Integer.parseInt(categoryId));
         }
         catch (Exception e)
         {

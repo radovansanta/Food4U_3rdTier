@@ -8,7 +8,7 @@ public class RestaurantManager {
   ManageRestaurants manageRestaurants;
   Gson gson = new Gson();
 
-  public void AddRestaurant(String restaurantAsJson) {
+  public void addRestaurant(String restaurantAsJson) {
     System.out.println(restaurantAsJson);
     try {
       Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
@@ -18,7 +18,7 @@ public class RestaurantManager {
     }
   }
 
-  public String GetRestaurant(String username) {
+  public String getRestaurant(String username) {
     try {
       return gson.toJson(manageRestaurants.getRestaurant(username));
     } catch (Exception e) {
@@ -27,16 +27,7 @@ public class RestaurantManager {
     }
   }
 
-  public String ValidateLogin(String username) {
-    try {
-      return gson.toJson(manageRestaurants.getRestaurant(username));
-    } catch (Exception e) {
-      System.out.println(e);
-      return null;
-    }
-  }
-
-  public void UpdateRestaurant(String restaurantAsJson) {
+  public void updateRestaurant(String restaurantAsJson) {
     try {
       Restaurant restaurant = gson.fromJson(restaurantAsJson, Restaurant.class);
       System.out.println("Restaurant object is: " + restaurant);
@@ -46,7 +37,7 @@ public class RestaurantManager {
     }
   }
 
-  public void RemoveRestaurant(String username) {
+  public void deleteRestaurant(String username) {
     try {
       manageRestaurants.deleteRestaurant(username);
     } catch (Exception e) {
@@ -54,7 +45,7 @@ public class RestaurantManager {
     }
   }
 
-  public String GetRestaurants() {
+  public String getRestaurants() {
     try {
       return gson.toJson(manageRestaurants.getRestaurants());
     } catch (Exception e) {

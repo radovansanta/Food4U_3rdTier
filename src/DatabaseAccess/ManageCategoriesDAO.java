@@ -27,11 +27,11 @@ public class ManageCategoriesDAO implements ManageCategories{
 
     // TODO: 01.12.2021 test
     @Override
-    public Category getCategory(int categoryID) {
+    public Category getCategory(int categoryId) {
         Category category = new Category();
         try(Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE category_id = ?");
-            statement.setInt(1, categoryID);
+            statement.setInt(1, categoryId);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next())
             {
@@ -45,10 +45,10 @@ public class ManageCategoriesDAO implements ManageCategories{
 
     // TODO: 01.12.2021 test
     @Override
-    public void deleteCategory(int categoryID){
+    public void deleteCategory(int categoryId){
         try(Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM category WHERE category_id = ?");
-            statement.setInt(1, categoryID);
+            statement.setInt(1, categoryId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -69,11 +69,11 @@ public class ManageCategoriesDAO implements ManageCategories{
 
     // TODO: 01.12.2021 test
     @Override
-    public ArrayList<Category> getCategoriesByMenuID(int menuID) {
+    public ArrayList<Category> getCategoriesByMenuId(int menuId) {
         ArrayList<Category> categories = new ArrayList<>();
         try(Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM category WHERE menu_id = ?");
-            statement.setInt(1, menuID);
+            statement.setInt(1, menuId);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 categories.add(getCategory(resultSet));
@@ -89,15 +89,14 @@ public class ManageCategoriesDAO implements ManageCategories{
         Category category = new Category();
         try{
             String name = resultSet.getString(1);
-            int categoryID = resultSet.getInt(2);
+            int categoryId = resultSet.getInt(2);
             int menuID = resultSet.getInt(3);
-            category.setCategoryID(categoryID);
+            category.setCategoryID(categoryId);
             category.setName(name);
             category.setMenuId(menuID);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(category.toString());
         return category;
     }
 }

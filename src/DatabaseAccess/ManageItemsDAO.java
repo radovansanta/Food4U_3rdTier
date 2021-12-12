@@ -31,11 +31,11 @@ public class ManageItemsDAO implements ManageItems{
 
     // TODO: 01.12.2021 test
     @Override
-    public Item getItemByItemID(int itemID) {
+    public Item getItemByItemId(int itemId) {
         Item item = new Item();
         try(Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM item WHERE item_id = ?");
-            statement.setInt(1, itemID);
+            statement.setInt(1, itemId);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 item = getItem(resultSet);
@@ -73,10 +73,10 @@ public class ManageItemsDAO implements ManageItems{
 
     // TODO: 01.12.2021 test
     @Override
-    public void deleteItem(int itemID) {
+    public void deleteItem(int itemId) {
         try(Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM item WHERE item_id = ?");
-            statement.setInt(1, itemID);
+            statement.setInt(1, itemId);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

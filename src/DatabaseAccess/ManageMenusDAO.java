@@ -56,11 +56,11 @@ public class ManageMenusDAO implements ManageMenus {
 
     // TODO: 01.12.2021 test
     @Override
-    public Menu getMenu(int menuID) {
+    public Menu getMenu(int menuId) {
         Menu menu = new Menu();
         try(Connection connection = databaseConnection.getConnection()){
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM menu WHERE menu_id = ?");
-            statement.setInt(1, menuID);
+            statement.setInt(1, menuId);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 menu = getMenu(resultSet);
@@ -73,10 +73,10 @@ public class ManageMenusDAO implements ManageMenus {
 
     // TODO: 01.12.2021 test
     @Override
-    public void deleteMenu(int menuID) {
+    public void deleteMenu(int menuId) {
         try(Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM menu WHERE menu_id = ?");
-            statement.setInt(1, menuID);
+            statement.setInt(1, menuId);
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

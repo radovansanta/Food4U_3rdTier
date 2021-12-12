@@ -49,11 +49,11 @@ public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions{
 
     // TODO: 01.12.2021 test
     @Override
-    public DeliveryOption getDeliveryOption(int deliveryID) {
+    public DeliveryOption getDeliveryOption(int deliveryId) {
         DeliveryOption deliveryOption = new DeliveryOption();
         try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM delivery WHERE delivery_id = ?");
-            statement.setInt(1, deliveryID);
+            statement.setInt(1, deliveryId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 deliveryOption = getDeliveryOption(resultSet);
@@ -88,7 +88,7 @@ public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions{
 
     // TODO: 01.12.2021 test
     @Override
-    public void deleteDeliveryOption(int deliveryID) {
+    public void deleteDeliveryOption(int deliveryId) {
         try(Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM delivery WHERE delivery_id = ?");
             statement.setInt(1, 1);

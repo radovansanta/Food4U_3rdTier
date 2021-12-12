@@ -7,6 +7,6 @@ public interface ManageMenus {
     void addMenu(Menu menu);
     void updateMenu(Menu menu);
     Menu getMenuByRestaurant(String username);
-    Menu getMenu(int menuID);
-    void deleteMenu(int menuID);
+    Menu getMenu(int menuId);
+    void deleteMenu(int menuId);
 }

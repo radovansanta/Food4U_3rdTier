@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 public interface ManageItems {
     void addItem(Item item);
-    Item getItemByItemID(int itemID);
+    Item getItemByItemId(int itemId);
     void updateItem(Item item);
-    void deleteItem(int itemID);
+    void deleteItem(int itemId);
     ArrayList<Item> getItemsByCategoryId(int categoryId);
 
 }

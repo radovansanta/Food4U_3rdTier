@@ -12,6 +12,7 @@ public class Order {
     private String status;
     private String customerUsername;
     private String restaurantUsername;
+    private String driverUsername;
     private int deliveryID;
     private ArrayList<Item> items;
 
@@ -24,12 +25,13 @@ public class Order {
         status = null;
         customerUsername = null;
         restaurantUsername = null;
+        driverUsername = null;
         deliveryID = 0;
         items = new ArrayList<>();
     }
 
     public Order(int orderID, String comment, String address, double price, String date, String status,
-                 String customerUsername, String restaurantUsername, int deliveryID) {
+                 String customerUsername, String restaurantUsername, String driverUsername, int deliveryID) {
         this.orderID = orderID;
         this.comment = comment;
         this.address = address;
@@ -38,6 +40,7 @@ public class Order {
         this.status = status;
         this.customerUsername = customerUsername;
         this.restaurantUsername = restaurantUsername;
+        this.driverUsername = driverUsername;
         this.deliveryID = deliveryID;
     }
 
@@ -81,6 +84,10 @@ public class Order {
         this.items = items;
     }
 
+    public void setDriverUsername(String driverUsername) {
+        this.driverUsername = driverUsername;
+    }
+
     public int getOrderID() {
         return orderID;
     }
@@ -115,6 +122,10 @@ public class Order {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getDriverUsername() {
+        return driverUsername;
     }
 
     public ArrayList<Item> getItems() {

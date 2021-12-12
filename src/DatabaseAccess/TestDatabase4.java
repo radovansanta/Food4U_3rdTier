@@ -5,7 +5,7 @@ import Models.Category;
 public class TestDatabase4
 {
     public static void main(String[] args) {
-        Food4UDAO food4UDAO = Food4UDAO.getInstance();
+       // Food4UDAO food4UDAO = Food4UDAO.getInstance();
        // User user1 = new User("user", "password");
        // DeliveryOption deliveryOption1 = new DeliveryOption(1,"takeaway", 0);
        // DeliveryOption deliveryOption2 = new DeliveryOption(2,"delivery", 199);
@@ -39,6 +39,6 @@ public class TestDatabase4
         //delete from database
         //food4UDAO.deleteRestaurant(1);
 
-        System.out.println(food4UDAO.getRestaurants());
+        //System.out.println(food4UDAO.getRestaurants());
     }
 }

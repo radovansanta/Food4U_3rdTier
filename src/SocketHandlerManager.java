@@ -65,7 +65,7 @@ import java.net.Socket;
         System.out.println("I got a request to add Restaurant" + request.getContext());
         try
         {
-          restaurantManager.AddRestaurant(request.getContext());
+          restaurantManager.addRestaurant(request.getContext());
         }
         catch (Exception e)
         {
@@ -77,7 +77,7 @@ import java.net.Socket;
       if (request.getType().equals("GetRestaurant"))
       {
         System.out.println("I got a request to get Restaurant" + request.getContext());
-        String response = restaurantManager.GetRestaurant(request.getContext());
+        String response = restaurantManager.getRestaurant(request.getContext());
         byte[] responseAsBytes = response.getBytes();
         try
         {
@@ -93,7 +93,7 @@ import java.net.Socket;
       if (request.getType().equals("ValidateRestaurant"))
       {
         System.out.println("I got a request to validate Restaurant" + request.getContext());
-        String response = restaurantManager.ValidateLogin(request.getContext());
+        String response = restaurantManager.getRestaurant(request.getContext());
         byte[] responseAsBytes = response.getBytes();
         try
         {
@@ -111,7 +111,7 @@ import java.net.Socket;
         System.out.println("I got a request to update a Restaurant" + request.getContext());
         try
         {
-          restaurantManager.UpdateRestaurant(request.getContext());
+          restaurantManager.updateRestaurant(request.getContext());
         }
         catch (Exception e)
         {
@@ -119,14 +119,15 @@ import java.net.Socket;
         }
       }
 
+      // TODO: 12.12.2021 what are we sending back here to tier2????
       // Delete Restaurant
       if (request.getType().equals("DeleteRestaurant"))
       {
         System.out.println("I got a request to remove a Restaurant" + request.getContext());
         try
         {
-          String response = restaurantManager.GetRestaurant(request.getContext());
-          restaurantManager.RemoveRestaurant(request.getContext());
+          String response = restaurantManager.getRestaurant(request.getContext());
+          restaurantManager.deleteRestaurant(request.getContext());
           byte[] responseAsBytes = response.getBytes();
           try
           {
@@ -147,7 +148,7 @@ import java.net.Socket;
       if (request.getType().equals("GetRestaurants"))
       {
         System.out.println("I got a request to get all Restaurants");
-        String response = restaurantManager.GetRestaurants();
+        String response = restaurantManager.getRestaurants();
         byte[] responseAsBytes = response.getBytes();
         try
         {
@@ -167,7 +168,7 @@ import java.net.Socket;
 
         try
         {
-          menuManager.AddMenu(request.getContext());
+          menuManager.addMenu(request.getContext());
         }
         catch (Exception e)
         {
@@ -179,7 +180,7 @@ import java.net.Socket;
       if (request.getType().equals("GetMenu"))
       {
         System.out.println("I got a request to get Menu" + request.getContext());
-        String response = menuManager.GetMenu(request.getContext());
+        String response = menuManager.getMenu(request.getContext());
         byte[] responseAsBytes = response.getBytes();
         try
         {
@@ -271,7 +272,7 @@ import java.net.Socket;
       }
 
 
-// Delete Category
+      // Delete Category
       if (request.getType().equals("DeleteCategory"))
       {
         System.out.println("I got a request to delete Category" + request.getContext());
@@ -359,7 +360,7 @@ import java.net.Socket;
         try
         {
           //TODO Missing GetItem Api - noticed 9.12 01:19
-          String response = itemManager.GetItem(request.getContext());
+          String response = itemManager.getItem(request.getContext());
           itemManager.deleteItem(request.getContext());
           byte[] responseAsBytes = response.getBytes();
           try
@@ -384,7 +385,7 @@ import java.net.Socket;
       if (request.getType().equals("AddCustomer")){
         System.out.println("I got a request to add Customer" + request.getContext());
         try{
-          customerManager.AddCustomer(request.getContext());
+          customerManager.addCustomer(request.getContext());
         }
         catch (Exception e){
           System.out.println(e);
@@ -394,7 +395,7 @@ import java.net.Socket;
       // Get Customer
       if (request.getType().equals("GetCustomer")){
         System.out.println("I got a request to get Customer" + request.getContext());
-        String response = customerManager.GetCustomer(request.getContext());
+        String response = customerManager.getCustomer(request.getContext());
         byte[] responseAsBytes = response.getBytes();
         try
         {
@@ -409,7 +410,7 @@ import java.net.Socket;
       // Validate Customer
       if (request.getType().equals("ValidateCustomer")){
         System.out.println("I got a request to validate Customer" + request.getContext());
-        String response = customerManager.GetCustomer(request.getContext());
+        String response = customerManager.getCustomer(request.getContext());
         byte[] responseAsBytes = response.getBytes();
         try
         {
@@ -428,7 +429,7 @@ import java.net.Socket;
 
         try
         {
-          customerManager.UpdateCustomer(request.getContext());
+          customerManager.updateCustomer(request.getContext());
         }
         catch (Exception e)
         {
@@ -436,14 +437,14 @@ import java.net.Socket;
         }
       }
 
-
+      // TODO: 12.12.2021  what are we sending back here to tier2????
       // Delete Customer
       if (request.getType().equals("DeleteCustomer"))
       {
         System.out.println("I got a request to delete Customer" + request.getContext());
         try
         {
-          String response = customerManager.GetCustomer(request.getContext());
+          String response = customerManager.getCustomer(request.getContext());
           customerManager.deleteCustomer(request.getContext());
           byte[] responseAsBytes = response.getBytes();
           try
@@ -486,6 +487,7 @@ import java.net.Socket;
         }
       }
 
+      // TODO: 12.12.2021 we should send the orders back to tier2
       //Get incoming orders
       if (request.getType().equals("GetIncomingOrders")){
         System.out.println("I got a request to get incoming orders" + request.getContext());
@@ -497,6 +499,7 @@ import java.net.Socket;
         }
       }
 
+      // TODO: 12.12.2021 we should send the orders back to tier2
       //Get accepted orders
       if (request.getType().equals("GetAcceptedOrders")){
         System.out.println("I got a request to get accepted orders" + request.getContext());
@@ -508,6 +511,7 @@ import java.net.Socket;
         }
       }
 
+      // TODO: 12.12.2021 we should send the orders back to tier2
       // Get previous orders
       if (request.getType().equals("GetPreviousOrders")){
         System.out.println("I got a request to get previous orders" + request.getContext());
@@ -578,6 +582,7 @@ import java.net.Socket;
       }
 
 
+      // TODO: 12.12.2021 what are we sending back here to tier2????
       // Delete Driver
       if (request.getType().equals("DeleteDriver"))
       {
@@ -601,7 +606,6 @@ import java.net.Socket;
           System.out.println(e);
         }
       }
-
     }
   }
 

@@ -10,7 +10,7 @@ public class MenuManager
   ManageMenus manageMenus;
   Gson gson = new Gson();
 
-  public void AddMenu(String menuAsJson)
+  public void addMenu(String menuAsJson)
   {
     System.out.println(menuAsJson);
     try
@@ -24,7 +24,7 @@ public class MenuManager
     }
   }
 
-  public String GetMenu(String menuId){
+  public String getMenu(String menuId){
     try
     {
       return gson.toJson(manageMenus.getMenu(Integer.parseInt(menuId)));
@@ -45,4 +45,6 @@ public class MenuManager
       e.printStackTrace();
     }
   }
+
+  // TODO: 12.12.2021 we should have 'deleteMenu'
 }

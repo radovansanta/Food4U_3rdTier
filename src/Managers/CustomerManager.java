@@ -10,7 +10,7 @@ public class CustomerManager
   ManageCustomers manageCustomers;
   Gson gson = new Gson();
 
-  public void AddCustomer(String customerAsJson)
+  public void addCustomer(String customerAsJson)
   {
     System.out.println(customerAsJson);
     try
@@ -23,7 +23,7 @@ public class CustomerManager
     }
   }
 
-  public String GetCustomer(String username)
+  public String getCustomer(String username)
   {
     try
     {
@@ -35,7 +35,7 @@ public class CustomerManager
     }
   }
 
-  public void UpdateCustomer(String customerAsJson){
+  public void updateCustomer(String customerAsJson){
     try{
       Customer customer = gson.fromJson(customerAsJson, Customer.class);
       manageCustomers.updateCustomer(customer);
