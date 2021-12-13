@@ -32,6 +32,23 @@ public class ManageOrdersDAO implements ManageOrders{
         }
     }
 
+    @Override
+    public Order getOrder(int orderId) {
+        Order order = new Order();
+        try(Connection connection = databaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM purchase WHERE order_id = ?");
+            statement.setInt(1, orderId);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next())
+            {
+                order = getOrder(resultSet);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return order;
+    }
+
     // TODO: 09.12.2021 test
     @Override
     public ArrayList<Order> getIncomingOrders(String restaurantUsername) {
