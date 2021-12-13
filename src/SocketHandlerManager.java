@@ -476,6 +476,21 @@ import java.net.Socket;
         }
       }
 
+      //Get order
+      if (request.getType().equals("GetOrder")){
+        System.out.println("I got a request to get Order" + request.getContext());
+        String response = orderManager.getOrder(request.getContext());
+        byte[] responseAsBytes = response.getBytes();
+        try
+        {
+          outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+
       // Update order
       if (request.getType().equals("UpdateOrder")){
         System.out.println("I got a request to update Order" + request.getContext());

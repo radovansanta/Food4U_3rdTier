@@ -18,6 +18,16 @@ public class OrderManager {
         }
     }
 
+    public String getOrder(String orderId)
+    {
+        try{
+            return gson.toJson(manageOrders.getOrder(Integer.parseInt(orderId)));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public String getIncomingOrders(String restaurantUsername) {
         try {
             return gson.toJson(manageOrders.getIncomingOrders(restaurantUsername));
