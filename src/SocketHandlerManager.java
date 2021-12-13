@@ -523,6 +523,18 @@ import java.net.Socket;
         }
       }
 
+      // TODO: 12.12.2021 we should send the orders back to tier2
+      // Get ready for pick up orders
+      if (request.getType().equals("GetReadyForPickUpOrders")){
+        System.out.println("I got a request to get ready for pick up orders" + request.getContext());
+        try{
+          orderManager.getReadyForPickUpOrders();
+        }
+        catch (Exception e){
+          System.out.println(e);
+        }
+      }
+
 
       // *****DRIVER stuffs*****
       // Add Driver
