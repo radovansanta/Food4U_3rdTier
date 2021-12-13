@@ -7,13 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ManageDriversDAO implements ManageDrivers{
+public class ManageDriversDAO implements ManageDrivers {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
     @Override
     public void addDriver(Driver driver) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO driver(user_name, first_name, last_name," +
                     "phone_number, email, password, license_number) VALUES (?,?,?,?,?,?,?)");
             statement.setString(1, driver.getUsername());
@@ -32,12 +32,11 @@ public class ManageDriversDAO implements ManageDrivers{
     @Override
     public Driver getDriver(String username) {
         Driver driver = new Driver();
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM driver WHERE user_name = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next())
-            {
+            while (resultSet.next()) {
                 driver = getDriver(resultSet);
             }
         } catch (SQLException e) {
@@ -48,7 +47,7 @@ public class ManageDriversDAO implements ManageDrivers{
 
     @Override
     public void updateDriver(Driver driver) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE driver SET password = ? WHERE user_name = ?");
             statement.setString(1, driver.getPassword());
             statement.setString(2, driver.getUsername());
@@ -84,7 +83,7 @@ public class ManageDriversDAO implements ManageDrivers{
 
     @Override
     public void deleteDriver(String username) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM driver WHERE user_name = ?");
             statement.setString(1, username);
         } catch (SQLException e) {
@@ -92,10 +91,9 @@ public class ManageDriversDAO implements ManageDrivers{
         }
     }
 
-    private Driver getDriver(ResultSet resultSet)
-    {
+    private Driver getDriver(ResultSet resultSet) {
         Driver driver = new Driver();
-        try{
+        try {
             String username = resultSet.getString(1);
             String firstName = resultSet.getString(2);
             String lastName = resultSet.getString(3);

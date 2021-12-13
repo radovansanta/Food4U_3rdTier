@@ -7,11 +7,16 @@ import com.google.gson.JsonSyntaxException;
 
 public class CategoryManager {
     ManageCategories manageCategories;
-    Gson gson = new Gson();
+    Gson gson;
 
-    public void addCategory(String categoryAsJson){
+    public CategoryManager(ManageCategories manageCategories) {
+        this.manageCategories = manageCategories;
+        this.gson = new Gson();
+    }
+
+    public void addCategory(String categoryAsJson) {
         System.out.println(categoryAsJson);
-        try{
+        try {
             Category category = gson.fromJson(categoryAsJson, Category.class);
             manageCategories.addCategory(category);
         } catch (JsonSyntaxException e) {
@@ -19,20 +24,20 @@ public class CategoryManager {
         }
     }
 
-    public String getCategory(String categoryId){
-        try{
+    public String getCategory(String categoryId) {
+        try {
             return gson.toJson(manageCategories.getCategory(
-                Integer.parseInt(categoryId)));
+                    Integer.parseInt(categoryId)));
         } catch (JsonSyntaxException e) {
             System.out.println(e);
             return null;
         }
     }
 
-    public String getCategories(String menuId){
-        try{
+    public String getCategories(String menuId) {
+        try {
             return gson.toJson(manageCategories.getCategoriesByMenuId(
-                Integer.parseInt(menuId)));
+                    Integer.parseInt(menuId)));
         } catch (JsonSyntaxException e) {
             System.out.println(e);
             return null;
@@ -48,13 +53,11 @@ public class CategoryManager {
             e.printStackTrace();
         }
     }
+
     public void deleteCategory(String categoryId) {
-        try
-        {
+        try {
             manageCategories.deleteCategory(Integer.parseInt(categoryId));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e);
         }
     }

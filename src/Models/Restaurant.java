@@ -18,8 +18,8 @@ public class Restaurant extends User {
     private Menu menu;
     private boolean visibility;
 
-    public Restaurant(){
-        super(null,null);
+    public Restaurant() {
+        super(null, null);
         name = null;
         address = null;
         phoneNumber = null;
@@ -111,7 +111,9 @@ public class Restaurant extends User {
         return phoneNumber;
     }
 
-    public boolean getVisibility() {return visibility;}
+    public boolean getVisibility() {
+        return visibility;
+    }
 
     public void setMenu(Menu menu) {
         this.menu = menu;
@@ -169,8 +171,7 @@ public class Restaurant extends User {
         this.openingHoursSunday = openingHoursSunday;
     }
 
-    public void setVisibility(boolean visibility)
-    {
+    public void setVisibility(boolean visibility) {
         this.visibility = visibility;
     }
 

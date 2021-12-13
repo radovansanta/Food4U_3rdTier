@@ -6,21 +6,21 @@ public class DeliveryOption {
     private double price;
     private String username;
 
-    public DeliveryOption(){
+    public DeliveryOption() {
         deliveryID = 0;
         deliveryName = null;
         price = 0;
         username = null;
     }
 
-    public DeliveryOption(int deliveryID, String deliveryName, double price, String username){
+    public DeliveryOption(int deliveryID, String deliveryName, double price, String username) {
         this.deliveryID = deliveryID;
         this.deliveryName = deliveryName;
         this.price = price;
         this.username = username;
     }
 
-    public DeliveryOption(String deliveryName, double price){
+    public DeliveryOption(String deliveryName, double price) {
         this.deliveryName = deliveryName;
         this.price = price;
     }

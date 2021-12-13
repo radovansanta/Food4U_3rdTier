@@ -6,7 +6,12 @@ import com.google.gson.Gson;
 
 public class DriverManager {
     ManageDrivers manageDrivers;
-    Gson gson = new Gson();
+    Gson gson;
+
+    public DriverManager(ManageDrivers manageDrivers) {
+        this.manageDrivers = manageDrivers;
+        this.gson = new Gson();
+    }
 
     public void addDriver(String driverAsJson) {
         System.out.println(driverAsJson);

@@ -18,7 +18,6 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
     private ManageDeliveryOptions manageDeliveryOptions;
 
 
-
     // TODO: 01.12.2021 test
     @Override
     public void addRestaurant(Restaurant restaurant) {
@@ -47,8 +46,7 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
             if (restaurant.getDeliveryOption2() != null) {
                 manageDeliveryOptions.addDeliveryOption(restaurant.getDeliveryOption2());
             }
-            if(restaurant.getMenu() != null)
-            {
+            if (restaurant.getMenu() != null) {
                 manageMenus.addMenu(restaurant.getMenu());
             }
         } catch (SQLException e) {
@@ -124,11 +122,11 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
             statement.setBoolean(1, restaurant.getVisibility());
             statement.setString(2, restaurant.getUsername());
             statement.executeUpdate();
-            if(restaurant.getDeliveryOption1() != null)
+            if (restaurant.getDeliveryOption1() != null)
                 manageDeliveryOptions.updateDeliveryOption(restaurant.getDeliveryOption1());
-            if(restaurant.getDeliveryOption2() != null)
+            if (restaurant.getDeliveryOption2() != null)
                 manageDeliveryOptions.updateDeliveryOption(restaurant.getDeliveryOption2());
-            if(restaurant.getMenu() != null)
+            if (restaurant.getMenu() != null)
                 manageMenus.updateMenu(restaurant.getMenu());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -138,7 +136,7 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
     // TODO: 01.12.2021 test
     @Override
     public void deleteRestaurant(String username) {
-        try(Connection connection = databaseConnection.getConnection()){
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM restaurant WHERE user_name = ?");
             statement.setString(1, username);
             statement.executeUpdate();
@@ -150,11 +148,10 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
     @Override
     public ArrayList<Restaurant> getRestaurants() {
         ArrayList<Restaurant> restaurants = new ArrayList<>();
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM restaurant WHERE visibility = true");
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next())
-            {
+            while (resultSet.next()) {
                 restaurants.add(getRestaurant(resultSet));
             }
         } catch (SQLException e) {
@@ -202,7 +199,7 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
             if (deliveryOptions.size() >= 2) {
                 restaurant.setDeliveryOption2(deliveryOptions.get(1));
             }
-            if(menu != null)
+            if (menu != null)
                 restaurant.setMenu(menu);
         } catch (SQLException e) {
             e.printStackTrace();

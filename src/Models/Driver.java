@@ -1,6 +1,6 @@
 package Models;
 
-public class Driver extends User{
+public class Driver extends User {
 
     private String firstName;
     private String lastName;
@@ -10,9 +10,9 @@ public class Driver extends User{
     private String licenseNumber;
 
 
-    public Driver(){
-        super(null,null);
-        firstName= null;
+    public Driver() {
+        super(null, null);
+        firstName = null;
         lastName = null;
         phoneNumber = null;
         email = null;
@@ -20,7 +20,7 @@ public class Driver extends User{
         licenseNumber = null;
     }
 
-    public Driver(String username, String password,String firstName, String lastName, String phoneNumber, String email, String address, String licenseNumber) {
+    public Driver(String username, String password, String firstName, String lastName, String phoneNumber, String email, String address, String licenseNumber) {
 
         super(username, password);
         this.firstName = firstName;
@@ -32,40 +32,72 @@ public class Driver extends User{
     }
 
     @Override
-    public void setUsername(String username) {super.setUsername(username);}
+    public void setUsername(String username) {
+        super.setUsername(username);
+    }
 
     @Override
-    public void setPassword(String password) {super.setPassword(password);}
+    public void setPassword(String password) {
+        super.setPassword(password);
+    }
 
-    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-    public void setEmail(String email) {this.email = email;}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public void setAddress(String address) {this.address = address;}
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
-    public void setLicenseNumber(String licenseNumber) {this.licenseNumber = licenseNumber;}
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
 
-    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
-    public String getEmail() {return email;}
+    public String getEmail() {
+        return email;
+    }
 
-    public String getAddress() {return address;}
+    public String getAddress() {
+        return address;
+    }
 
     @Override
-    public String getUsername() {return super.getUsername();}
+    public String getUsername() {
+        return super.getUsername();
+    }
 
     @Override
-    public String getPassword() {return super.getPassword();}
+    public String getPassword() {
+        return super.getPassword();
+    }
 
-    public String getFirstName() {return firstName;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public String getLastName() {return lastName;}
+    public String getLastName() {
+        return lastName;
+    }
 
-    public String getLicenseNumber() {return licenseNumber;}
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
 
-    public String getPhoneNumber() {return phoneNumber;}
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 
     @Override
     public String toString() {

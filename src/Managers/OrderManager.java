@@ -7,7 +7,12 @@ import com.google.gson.JsonSyntaxException;
 
 public class OrderManager {
     ManageOrders manageOrders;
-    Gson gson = new Gson();
+    Gson gson;
+
+    public OrderManager(ManageOrders manageOrders) {
+        this.manageOrders = manageOrders;
+        this.gson = new Gson();
+    }
 
     public void addOrder(String orderAsJson) {
         try {
@@ -18,9 +23,8 @@ public class OrderManager {
         }
     }
 
-    public String getOrder(String orderId)
-    {
-        try{
+    public String getOrder(String orderId) {
+        try {
             return gson.toJson(manageOrders.getOrder(Integer.parseInt(orderId)));
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -55,14 +59,13 @@ public class OrderManager {
         }
     }
 
-    public String getReadyForPickUpOrders()
-    {
-      try{
-        return gson.toJson(manageOrders.getReadyForPickUpOrders());
-      } catch (Exception e) {
-        e.printStackTrace();
-        return null;
-      }
+    public String getReadyForPickUpOrders() {
+        try {
+            return gson.toJson(manageOrders.getReadyForPickUpOrders());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void updateOrder(String orderAsJson) {

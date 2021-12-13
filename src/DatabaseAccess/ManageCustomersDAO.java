@@ -7,14 +7,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ManageCustomersDAO implements ManageCustomers{
+public class ManageCustomersDAO implements ManageCustomers {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
     // TODO: 03.12.2021 test
     @Override
     public void addCustomer(Customer customer) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO customer(user_name, password," +
                     "first_name, last_name, phone_number, email, address) VALUES (?,?,?,?,?,?,?)");
             statement.setString(1, customer.getUsername());
@@ -33,7 +33,7 @@ public class ManageCustomersDAO implements ManageCustomers{
     // TODO: 03.12.2021 test
     @Override
     public void updateCustomer(Customer customer) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE customer SET password = ? WHERE user_name = ?");
             statement.setString(1, customer.getPassword());
             statement.setString(2, customer.getUsername());
@@ -67,12 +67,11 @@ public class ManageCustomersDAO implements ManageCustomers{
     @Override
     public Customer getCustomer(String username) {
         Customer customer = new Customer();
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM customer WHERE user_name = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next())
-            {
+            while (resultSet.next()) {
                 customer = getCustomer(resultSet);
             }
         } catch (SQLException e) {
@@ -84,7 +83,7 @@ public class ManageCustomersDAO implements ManageCustomers{
     // TODO: 03.12.2021 test
     @Override
     public void deleteCustomer(String username) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM customer WHERE user_name = ?");
             statement.setString(1, username);
             statement.executeUpdate();
@@ -94,9 +93,9 @@ public class ManageCustomersDAO implements ManageCustomers{
     }
 
     // TODO: 03.12.2021 test
-    private Customer getCustomer(ResultSet resultSet){
+    private Customer getCustomer(ResultSet resultSet) {
         Customer customer = new Customer();
-        try{
+        try {
             String userName = resultSet.getString(1);
             String firstName = resultSet.getString(2);
             String lastName = resultSet.getString(3);

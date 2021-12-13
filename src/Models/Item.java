@@ -8,7 +8,7 @@ public class Item {
     private int categoryId;
     private int discount;
 
-    public Item(){
+    public Item() {
         itemID = 0;
         name = null;
         description = null;
@@ -17,8 +17,7 @@ public class Item {
         discount = 0;
     }
 
-    public Item(int itemID, String name, String description, double price, int categoryId, int discount)
-    {
+    public Item(int itemID, String name, String description, double price, int categoryId, int discount) {
         this.itemID = itemID;
         this.name = name;
         this.description = description;
@@ -47,7 +46,9 @@ public class Item {
         this.categoryId = categoryId;
     }
 
-    public void setDiscount ( int discount) {this.discount = discount;}
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
 
     public String getName() {
         return name;
@@ -69,7 +70,9 @@ public class Item {
         return categoryId;
     }
 
-    public int getDiscount() {return discount;}
+    public int getDiscount() {
+        return discount;
+    }
 
     @Override
     public String toString() {

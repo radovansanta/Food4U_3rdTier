@@ -14,7 +14,7 @@ public class ManageMenusDAO implements ManageMenus {
     // TODO: 01.12.2021 test
     @Override
     public void addMenu(Menu menu) {
-        try(Connection connection = databaseConnection.getConnection()){
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO menu(description, user_name)" +
                     "VALUES (?, ?)");
             statement.setString(1, menu.getDescription());
@@ -28,7 +28,7 @@ public class ManageMenusDAO implements ManageMenus {
     // TODO: 01.12.2021 test
     @Override
     public void updateMenu(Menu menu) {
-        try(Connection connection = databaseConnection.getConnection()){
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE menu SET description = ? WHERE menu_id = ?");
             statement.setString(1, menu.getDescription());
             statement.setInt(2, menu.getMenuID());
@@ -41,11 +41,11 @@ public class ManageMenusDAO implements ManageMenus {
     @Override
     public Menu getMenuByRestaurant(String username) {
         Menu menu = new Menu();
-        try(Connection connection = databaseConnection.getConnection()){
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM menu WHERE user_name = ?");
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 menu = getMenu(resultSet);
             }
         } catch (SQLException e) {
@@ -58,11 +58,11 @@ public class ManageMenusDAO implements ManageMenus {
     @Override
     public Menu getMenu(int menuId) {
         Menu menu = new Menu();
-        try(Connection connection = databaseConnection.getConnection()){
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM menu WHERE menu_id = ?");
             statement.setInt(1, menuId);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 menu = getMenu(resultSet);
             }
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class ManageMenusDAO implements ManageMenus {
     // TODO: 01.12.2021 test
     @Override
     public void deleteMenu(int menuId) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM menu WHERE menu_id = ?");
             statement.setInt(1, menuId);
             statement.executeUpdate();
@@ -83,9 +83,9 @@ public class ManageMenusDAO implements ManageMenus {
         }
     }
 
-    private Menu getMenu(ResultSet resultSet){
+    private Menu getMenu(ResultSet resultSet) {
         Menu menu = new Menu();
-        try{
+        try {
             int menu_id = resultSet.getInt(1);
             String description = resultSet.getString(2);
             String username = resultSet.getString(3);

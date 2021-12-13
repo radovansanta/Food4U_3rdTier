@@ -8,14 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ManageOrdersDAO implements ManageOrders{
+public class ManageOrdersDAO implements ManageOrders {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
     // TODO: 07.12.2021 test
     @Override
     public void addOrder(Order order) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO purchase(address, comment, " +
                     "customer_username, total_price, date, restaurant_username, delivery_option, status) VALUES (?,?,?,?,?,?,?, ?)");
             statement.setString(1, order.getAddress());
@@ -36,12 +36,11 @@ public class ManageOrdersDAO implements ManageOrders{
     @Override
     public Order getOrder(int orderId) {
         Order order = new Order();
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM purchase WHERE order_id = ?");
             statement.setInt(1, orderId);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next())
-            {
+            while (resultSet.next()) {
                 order = getOrder(resultSet);
             }
         } catch (SQLException e) {
@@ -54,13 +53,12 @@ public class ManageOrdersDAO implements ManageOrders{
     @Override
     public ArrayList<Order> getIncomingOrders(String restaurantUsername) {
         ArrayList<Order> orders = new ArrayList<>();
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM purchase WHERE restaurant_username = ?" +
                     "AND status = 'Incoming'");
             statement.setString(1, restaurantUsername);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next())
-            {
+            while (resultSet.next()) {
                 orders.add(getOrder(resultSet));
             }
         } catch (SQLException e) {
@@ -72,13 +70,12 @@ public class ManageOrdersDAO implements ManageOrders{
     @Override
     public ArrayList<Order> getAcceptedOrders(String restaurantUsername) {
         ArrayList<Order> orders = new ArrayList<>();
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM purchase WHERE restaurant_username = ?" +
                     "AND status = 'Accepted'");
             statement.setString(1, restaurantUsername);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next())
-            {
+            while (resultSet.next()) {
                 orders.add(getOrder(resultSet));
             }
         } catch (SQLException e) {
@@ -90,13 +87,12 @@ public class ManageOrdersDAO implements ManageOrders{
     @Override
     public ArrayList<Order> getPreviousOrders(String customerUsername) {
         ArrayList<Order> orders = new ArrayList<>();
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM purchase WHERE customer_username = ?" +
                     "AND status = 'Completed'");
             statement.setString(1, customerUsername);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next())
-            {
+            while (resultSet.next()) {
                 orders.add(getOrder(resultSet));
             }
         } catch (SQLException e) {
@@ -108,11 +104,10 @@ public class ManageOrdersDAO implements ManageOrders{
     @Override
     public ArrayList<Order> getReadyForPickUpOrders() {
         ArrayList<Order> orders = new ArrayList<>();
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM purchase WHERE status = 'Driver pick up'");
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next())
-            {
+            while (resultSet.next()) {
                 orders.add(getOrder(resultSet));
             }
         } catch (SQLException e) {
@@ -123,17 +118,17 @@ public class ManageOrdersDAO implements ManageOrders{
 
     @Override
     public void updateOrder(Order order) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE purchase SET status = ? WHERE order_id = ?");
-            if(order.getStatus().equalsIgnoreCase("accepted"))
+            if (order.getStatus().equalsIgnoreCase("accepted"))
                 statement.setString(1, "Accepted");
-            if(order.getStatus().equalsIgnoreCase("declined"))
+            if (order.getStatus().equalsIgnoreCase("declined"))
                 statement.setString(1, "Declined");
-            if(order.getStatus().equalsIgnoreCase("driver pick up"))
+            if (order.getStatus().equalsIgnoreCase("driver pick up"))
                 statement.setString(1, "Driver pick up");
-            if(order.getStatus().equalsIgnoreCase("customer pick up"))
+            if (order.getStatus().equalsIgnoreCase("customer pick up"))
                 statement.setString(1, "Customer pick up");
-            if(order.getStatus().equalsIgnoreCase("completed"))
+            if (order.getStatus().equalsIgnoreCase("completed"))
                 statement.setString(1, "Completed");
             statement.setInt(2, order.getOrderID());
             statement.executeUpdate();
@@ -142,9 +137,9 @@ public class ManageOrdersDAO implements ManageOrders{
         }
     }
 
-    private Order getOrder(ResultSet resultSet){
+    private Order getOrder(ResultSet resultSet) {
         Order order = new Order();
-        try{
+        try {
             String address = resultSet.getString(1);
             String comment = resultSet.getString(2);
             int orderID = resultSet.getInt(3);

@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions{
+public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
@@ -67,7 +67,7 @@ public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions{
     // TODO: 01.12.2021 test
     @Override
     public void updateDeliveryOption(DeliveryOption deliveryOption) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE delivery SET delivery_option = ? " +
                     "WHERE delivery_id = ?");
             if (deliveryOption.getDeliveryName().equalsIgnoreCase("takeaway")) {
@@ -89,7 +89,7 @@ public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions{
     // TODO: 01.12.2021 test
     @Override
     public void deleteDeliveryOption(int deliveryId) {
-        try(Connection connection = databaseConnection.getConnection()) {
+        try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM delivery WHERE delivery_id = ?");
             statement.setInt(1, 1);
             statement.executeUpdate();
