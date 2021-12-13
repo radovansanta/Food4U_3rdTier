@@ -33,6 +33,15 @@ public class MenuManager {
         }
     }
 
+    public String getMenuByRestaurant(String username){
+        try{
+            return gson.toJson(manageMenus.getMenuByRestaurant(username));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void updateMenu(String menuAsJson) {
         System.out.println(menuAsJson);
         try {
@@ -43,5 +52,11 @@ public class MenuManager {
         }
     }
 
-    // TODO: 12.12.2021 we should have 'deleteMenu'
+    public void deleteMenu(String menuId){
+        try{
+            manageMenus.deleteMenu(Integer.parseInt(menuId));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
 }

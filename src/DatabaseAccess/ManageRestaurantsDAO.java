@@ -1,8 +1,5 @@
 package DatabaseAccess;
 
-import Models.DeliveryOption;
-import Models.Menu;
-import Models.Order;
 import Models.Restaurant;
 
 import java.sql.Connection;
@@ -14,9 +11,6 @@ import java.util.ArrayList;
 public class ManageRestaurantsDAO implements ManageRestaurants {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
-    private ManageMenus manageMenus;
-    private ManageDeliveryOptions manageDeliveryOptions;
-
 
     // TODO: 01.12.2021 test
     @Override
@@ -40,15 +34,6 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
             statement.setString(13, restaurant.getDescription());
             statement.setBoolean(14, restaurant.getVisibility());
             statement.executeUpdate();
-            if (restaurant.getDeliveryOption1() != null) {
-                manageDeliveryOptions.addDeliveryOption(restaurant.getDeliveryOption1());
-            }
-            if (restaurant.getDeliveryOption2() != null) {
-                manageDeliveryOptions.addDeliveryOption(restaurant.getDeliveryOption2());
-            }
-            if (restaurant.getMenu() != null) {
-                manageMenus.addMenu(restaurant.getMenu());
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,12 +107,6 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
             statement.setBoolean(1, restaurant.getVisibility());
             statement.setString(2, restaurant.getUsername());
             statement.executeUpdate();
-            if (restaurant.getDeliveryOption1() != null)
-                manageDeliveryOptions.updateDeliveryOption(restaurant.getDeliveryOption1());
-            if (restaurant.getDeliveryOption2() != null)
-                manageDeliveryOptions.updateDeliveryOption(restaurant.getDeliveryOption2());
-            if (restaurant.getMenu() != null)
-                manageMenus.updateMenu(restaurant.getMenu());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -177,8 +156,6 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
             String openingHoursSunday = resultSet.getString(12);
             String description = resultSet.getString(13);
             boolean visibility = resultSet.getBoolean(14);
-            ArrayList<DeliveryOption> deliveryOptions = manageDeliveryOptions.getDeliveryOptionsByUsername(username);
-            Menu menu = manageMenus.getMenuByRestaurant(username);
             restaurant.setUsername(username);
             restaurant.setPassword(password);
             restaurant.setName(name);
@@ -193,14 +170,6 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
             restaurant.setOpeningHoursSunday(openingHoursSunday);
             restaurant.setDescription(description);
             restaurant.setVisibility(visibility);
-            if (deliveryOptions.size() >= 1) {
-                restaurant.setDeliveryOption1(deliveryOptions.get(0));
-            }
-            if (deliveryOptions.size() >= 2) {
-                restaurant.setDeliveryOption2(deliveryOptions.get(1));
-            }
-            if (menu != null)
-                restaurant.setMenu(menu);
         } catch (SQLException e) {
             e.printStackTrace();
         }

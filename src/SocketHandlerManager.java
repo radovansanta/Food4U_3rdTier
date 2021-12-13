@@ -14,6 +14,7 @@ public class SocketHandlerManager implements Runnable {
     private CustomerManager customerManager;
     private OrderManager orderManager;
     private DriverManager driverManager;
+    private DeliveryOptionsManager deliveryOptionsManager;
 
     private OutputStream outToClient;
     private InputStream inFromClient;
@@ -28,6 +29,7 @@ public class SocketHandlerManager implements Runnable {
         this.customerManager = managerFactory.getCustomerManager();
         this.orderManager = managerFactory.getOrderManager();
         this.driverManager = managerFactory.getDriverManager();
+        this.deliveryOptionsManager = managerFactory.getDeliveryOptionsManager();
 
         try {
             outToClient = this.socket.getOutputStream();
@@ -124,6 +126,64 @@ public class SocketHandlerManager implements Runnable {
             }
         }
 
+        // ****DELIVERY OPTION stuffs****
+        // Add Delivery Option
+        if (request.getType().equals("AddDeliveryOption")) {
+            System.out.println("I got a request to add Delivery option" + request.getContext());
+
+            try {
+                deliveryOptionsManager.addDeliveryOption(request.getContext());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Get Delivery Options by restaurant username
+        if(request.getType().equals("GetDeliveryOptionsByUsername"));{
+            System.out.println("I got a request to get delivery options by restaurant username" + request.getContext());
+            String response = deliveryOptionsManager.getDeliveryOptionsByUsername(request.getContext());
+            byte[] responseAsBytes = response.getBytes();
+            try{
+                outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Get Delivery Option
+        if(request.getType().equals("GetDeliveryOption"));{
+            System.out.println("I got a request to get delivery option" + request.getContext());
+            String response = deliveryOptionsManager.getDeliveryOption(request.getContext());
+            byte[] responseAsBytes = response.getBytes();
+            try{
+                outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Update Delivery Option
+        if (request.getType().equals("UpdateDeliveryOption")) {
+            System.out.println("I got a request to update Delivery option" + request.getContext());
+
+            try {
+                deliveryOptionsManager.updateDeliveryOption(request.getContext());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Delete Delivery Option
+        if (request.getType().equals("DeleteDeliveryOption")) {
+            System.out.println("I got a request to delete Delivery option" + request.getContext());
+
+            try {
+                deliveryOptionsManager.deleteDeliveryOption(request.getContext());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         // *****MENU stuffs*****
         // Add Menu
         if (request.getType().equals("AddMenu")) {
@@ -148,12 +208,35 @@ public class SocketHandlerManager implements Runnable {
             }
         }
 
+        // Get Menu by restaurant
+        if (request.getType().equals("GetMenuByRestaurant")) {
+            System.out.println("I got a request to get Menu by restaurant" + request.getContext());
+            String response = menuManager.getMenuByRestaurant(request.getContext());
+            byte[] responseAsBytes = response.getBytes();
+            try {
+                outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         // Update Menu
         if (request.getType().equals("UpdateMenu")) {
             System.out.println("I got a request to update Menu" + request.getContext());
 
             try {
                 menuManager.updateMenu(request.getContext());
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+        // Delete Menu
+        if (request.getType().equals("DeleteMenu")) {
+            System.out.println("I got a request to delete Menu" + request.getContext());
+
+            try {
+                menuManager.deleteMenu(request.getContext());
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -393,45 +476,49 @@ public class SocketHandlerManager implements Runnable {
             }
         }
 
-        // TODO: 12.12.2021 we should send the orders back to tier2
         //Get incoming orders
         if (request.getType().equals("GetIncomingOrders")) {
             System.out.println("I got a request to get incoming orders" + request.getContext());
             try {
-                orderManager.getIncomingOrders(request.getContext());
+                String response = orderManager.getIncomingOrders(request.getContext());
+                byte[] responseAsBytes = response.getBytes();
+                outToClient.write(responseAsBytes, 0, responseAsBytes.length);
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
 
-        // TODO: 12.12.2021 we should send the orders back to tier2
         //Get accepted orders
         if (request.getType().equals("GetAcceptedOrders")) {
             System.out.println("I got a request to get accepted orders" + request.getContext());
             try {
-                orderManager.getAcceptedOrders(request.getContext());
+                String response = orderManager.getAcceptedOrders(request.getContext());
+                byte[] responseAsBytes = response.getBytes();
+                outToClient.write(responseAsBytes, 0, responseAsBytes.length);
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
 
-        // TODO: 12.12.2021 we should send the orders back to tier2
         // Get previous orders
         if (request.getType().equals("GetPreviousOrders")) {
             System.out.println("I got a request to get previous orders" + request.getContext());
             try {
-                orderManager.getPreviousOrders(request.getContext());
+                String response = orderManager.getPreviousOrders(request.getContext());
+                byte[] responseAsBytes = response.getBytes();
+                outToClient.write(responseAsBytes, 0, responseAsBytes.length);
             } catch (Exception e) {
                 System.out.println(e);
             }
         }
 
-        // TODO: 12.12.2021 we should send the orders back to tier2
         // Get ready for pick up orders
         if (request.getType().equals("GetReadyForPickUpOrders")) {
             System.out.println("I got a request to get ready for pick up orders" + request.getContext());
             try {
-                orderManager.getReadyForPickUpOrders();
+                String response = orderManager.getReadyForPickUpOrders();
+                byte[] responseAsBytes = response.getBytes();
+                outToClient.write(responseAsBytes, 0, responseAsBytes.length);
             } catch (Exception e) {
                 System.out.println(e);
             }
