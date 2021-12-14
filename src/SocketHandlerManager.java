@@ -31,6 +31,10 @@ public class SocketHandlerManager implements Runnable {
         this.driverManager = managerFactory.getDriverManager();
         this.deliveryOptionsManager = managerFactory.getDeliveryOptionsManager();
 
+    }
+
+    @Override
+    public void run() {
         try {
             outToClient = this.socket.getOutputStream();
             inFromClient = this.socket.getInputStream();
@@ -42,10 +46,7 @@ public class SocketHandlerManager implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public void run() {
         System.out.println("MESSAGE IS: " + message);
         Request request = new Gson().fromJson(message, Request.class);
         System.out.println(request.getContext());
@@ -139,7 +140,7 @@ public class SocketHandlerManager implements Runnable {
         }
 
         // Get Delivery Options by restaurant username
-        if(request.getType().equals("GetDeliveryOptionsByUsername"));{
+        if(request.getType().equals("GetDeliveryOptionsByUsername")){
             System.out.println("I got a request to get delivery options by restaurant username" + request.getContext());
             String response = deliveryOptionsManager.getDeliveryOptionsByUsername(request.getContext());
             byte[] responseAsBytes = response.getBytes();
@@ -151,7 +152,7 @@ public class SocketHandlerManager implements Runnable {
         }
 
         // Get Delivery Option
-        if(request.getType().equals("GetDeliveryOption"));{
+        if(request.getType().equals("GetDeliveryOption")){
             System.out.println("I got a request to get delivery option" + request.getContext());
             String response = deliveryOptionsManager.getDeliveryOption(request.getContext());
             byte[] responseAsBytes = response.getBytes();
@@ -163,7 +164,7 @@ public class SocketHandlerManager implements Runnable {
         }
 
         // Update Delivery Option
-        if (request.getType().equals("UpdateDeliveryOption")) {
+        if (request.getType().equals("UpdateDeliveryOption")){
             System.out.println("I got a request to update Delivery option" + request.getContext());
 
             try {
@@ -588,6 +589,17 @@ public class SocketHandlerManager implements Runnable {
             } catch (Exception e) {
                 System.out.println(e);
             }
+        }
+
+        try
+        {
+            socket.close();
+            outToClient.close();
+            inFromClient.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 }
