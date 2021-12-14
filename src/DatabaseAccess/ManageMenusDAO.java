@@ -11,7 +11,6 @@ public class ManageMenusDAO implements ManageMenus {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
-    // TODO: 01.12.2021 test
     @Override
     public void addMenu(Menu menu) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -25,7 +24,6 @@ public class ManageMenusDAO implements ManageMenus {
         }
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void updateMenu(Menu menu) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -54,7 +52,6 @@ public class ManageMenusDAO implements ManageMenus {
         return menu;
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public Menu getMenu(int menuId) {
         Menu menu = new Menu();
@@ -71,7 +68,6 @@ public class ManageMenusDAO implements ManageMenus {
         return menu;
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void deleteMenu(int menuId) {
         try (Connection connection = databaseConnection.getConnection()) {

@@ -12,7 +12,6 @@ public class ManageCategoriesDAO implements ManageCategories {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
-    // TODO: 01.12.2021 test
     @Override
     public void addCategory(Category category) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -25,7 +24,6 @@ public class ManageCategoriesDAO implements ManageCategories {
         }
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public Category getCategory(int categoryId) {
         Category category = new Category();
@@ -42,31 +40,29 @@ public class ManageCategoriesDAO implements ManageCategories {
         return category;
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void deleteCategory(int categoryId) {
         try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM category WHERE category_id = ?");
             statement.setInt(1, categoryId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // TODO: 06.12.2021 test
-    @Override
-    public void updateCategory(Category category) {
-        try (Connection connection = databaseConnection.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("UPDATE category SET name = ? WHERE category_id = ?");
-            statement.setString(1, category.getName());
-            statement.setInt(2, category.getCategoryID());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // TODO: 01.12.2021 test
+    @Override
+    public void updateCategory(Category category) {
+        try (Connection connection = databaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("UPDATE category SET name = ? WHERE category_id = ?");
+            statement.setString(1, category.getName());
+            statement.setInt(2, category.getCategoryId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public ArrayList<Category> getCategoriesByMenuId(int menuId) {
         ArrayList<Category> categories = new ArrayList<>();
@@ -83,14 +79,13 @@ public class ManageCategoriesDAO implements ManageCategories {
         return categories;
     }
 
-    // TODO: 01.12.2021 test
     private Category getCategory(ResultSet resultSet) {
         Category category = new Category();
         try {
-            String name = resultSet.getString(1);
-            int categoryId = resultSet.getInt(2);
+            int categoryId = resultSet.getInt(1);
+            String name = resultSet.getString(2);
             int menuID = resultSet.getInt(3);
-            category.setCategoryID(categoryId);
+            category.setCategoryId(categoryId);
             category.setName(name);
             category.setMenuId(menuID);
         } catch (SQLException e) {

@@ -15,7 +15,7 @@ public class ManageDriversDAO implements ManageDrivers {
     public void addDriver(Driver driver) {
         try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO driver(user_name, first_name, last_name," +
-                    "phone_number, email, password, license_number) VALUES (?,?,?,?,?,?,?)");
+                    "phone_number, email, password, license_number, address) VALUES (?,?,?,?,?,?,?,?)");
             statement.setString(1, driver.getUsername());
             statement.setString(2, driver.getFirstName());
             statement.setString(3, driver.getLastName());
@@ -23,6 +23,7 @@ public class ManageDriversDAO implements ManageDrivers {
             statement.setString(5, driver.getEmail());
             statement.setString(6, driver.getPassword());
             statement.setString(7, driver.getLicenseNumber());
+            statement.setString(8, driver.getAddress());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,6 +87,7 @@ public class ManageDriversDAO implements ManageDrivers {
         try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM driver WHERE user_name = ?");
             statement.setString(1, username);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,14 +1,18 @@
 package Models;
 
+import java.util.ArrayList;
+
 public class Category {
     private int categoryId;
     private String name;
     private int menuId;
+    private ArrayList<Item> items;
 
     public Category() {
         categoryId = 0;
         name = null;
         menuId = 0;
+        items = new ArrayList<>();
     }
 
     public void setName(String name) {
@@ -19,8 +23,12 @@ public class Category {
         this.menuId = menuId;
     }
 
-    public void setCategoryID(int categoryID) {
+    public void setCategoryId(int categoryID) {
         this.categoryId = categoryID;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
     }
 
     public String getName() {
@@ -31,8 +39,12 @@ public class Category {
         return menuId;
     }
 
-    public int getCategoryID() {
+    public int getCategoryId() {
         return categoryId;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     @Override

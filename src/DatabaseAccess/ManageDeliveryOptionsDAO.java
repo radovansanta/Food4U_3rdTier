@@ -12,7 +12,6 @@ public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
-    // TODO: 01.12.2021 test
     @Override
     public void addDeliveryOption(DeliveryOption deliveryOption) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -47,7 +46,6 @@ public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions {
         return deliveryOptions;
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public DeliveryOption getDeliveryOption(int deliveryId) {
         DeliveryOption deliveryOption = new DeliveryOption();
@@ -64,7 +62,6 @@ public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions {
         return deliveryOption;
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void updateDeliveryOption(DeliveryOption deliveryOption) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -86,7 +83,6 @@ public class ManageDeliveryOptionsDAO implements ManageDeliveryOptions {
         }
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void deleteDeliveryOption(int deliveryId) {
         try (Connection connection = databaseConnection.getConnection()) {

@@ -1,6 +1,7 @@
 package DatabaseAccess;
 
 import Models.Item;
+import Models.Order;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,12 +13,11 @@ public class ManageItemsDAO implements ManageItems {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
-    // TODO: 01.12.2021 test
     @Override
     public void addItem(Item item) {
         try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO item(name, description, price, " +
-                    "category_name, discount) VALUES (?, ?, ?, ?, ?)");
+                    "category_id, discount) VALUES (?, ?, ?, ?, ?)");
             statement.setString(1, item.getName());
             statement.setString(2, item.getDescription());
             statement.setDouble(3, item.getPrice());
@@ -29,7 +29,6 @@ public class ManageItemsDAO implements ManageItems {
         }
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public Item getItemByItemId(int itemId) {
         Item item = new Item();
@@ -46,7 +45,6 @@ public class ManageItemsDAO implements ManageItems {
         return item;
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void updateItem(Item item) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -71,7 +69,6 @@ public class ManageItemsDAO implements ManageItems {
         }
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void deleteItem(int itemId) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -83,7 +80,6 @@ public class ManageItemsDAO implements ManageItems {
         }
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public ArrayList<Item> getItemsByCategoryId(int categoryId) {
         ArrayList<Item> items = new ArrayList<>();
@@ -100,7 +96,39 @@ public class ManageItemsDAO implements ManageItems {
         return items;
     }
 
-    // TODO: 01.12.2021 test
+    @Override
+    public void orderItems(ArrayList<Item> items, int orderId) {
+        try(Connection connection = databaseConnection.getConnection()){
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO ordereditem(order_id, item_id)" +
+                    " VALUES (?,?)");
+            for (int i = 0; i < items.size(); i++) {
+                statement.setInt(1, orderId);
+                statement.setInt(2, items.get(i).getItemID());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public ArrayList<Item> getItemsOrdered(int orderId) {
+        ArrayList<Item> items = new ArrayList<>();
+        try(Connection connection = databaseConnection.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM ordereditem WHERE order_id = ?");
+            statement.setInt(1, orderId);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                int order_id = resultSet.getInt(1);
+                int item_id = resultSet.getInt(2);
+                items.add(getItemByItemId(item_id));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
+    }
+
     private Item getItem(ResultSet resultSet) {
         Item item = new Item();
         try {

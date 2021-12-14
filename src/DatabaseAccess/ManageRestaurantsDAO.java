@@ -12,7 +12,6 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
-    // TODO: 01.12.2021 test
     @Override
     public void addRestaurant(Restaurant restaurant) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -55,7 +54,6 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
         return restaurant;
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void updateRestaurant(Restaurant restaurant) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -112,7 +110,6 @@ public class ManageRestaurantsDAO implements ManageRestaurants {
         }
     }
 
-    // TODO: 01.12.2021 test
     @Override
     public void deleteRestaurant(String username) {
         try (Connection connection = databaseConnection.getConnection()) {

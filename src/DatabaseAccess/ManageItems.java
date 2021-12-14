@@ -11,5 +11,6 @@ public interface ManageItems {
     void updateItem(Item item);
     void deleteItem(int itemId);
     ArrayList<Item> getItemsByCategoryId(int categoryId);
-
+    void orderItems(ArrayList<Item> items, int orderId);
+    ArrayList<Item> getItemsOrdered(int orderId);
 }

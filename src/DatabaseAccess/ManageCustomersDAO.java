@@ -11,7 +11,6 @@ public class ManageCustomersDAO implements ManageCustomers {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
-    // TODO: 03.12.2021 test
     @Override
     public void addCustomer(Customer customer) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -30,7 +29,6 @@ public class ManageCustomersDAO implements ManageCustomers {
         }
     }
 
-    // TODO: 03.12.2021 test
     @Override
     public void updateCustomer(Customer customer) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -63,7 +61,6 @@ public class ManageCustomersDAO implements ManageCustomers {
         }
     }
 
-    // TODO: 03.12.2021 test
     @Override
     public Customer getCustomer(String username) {
         Customer customer = new Customer();
@@ -80,7 +77,6 @@ public class ManageCustomersDAO implements ManageCustomers {
         return customer;
     }
 
-    // TODO: 03.12.2021 test
     @Override
     public void deleteCustomer(String username) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -92,7 +88,6 @@ public class ManageCustomersDAO implements ManageCustomers {
         }
     }
 
-    // TODO: 03.12.2021 test
     private Customer getCustomer(ResultSet resultSet) {
         Customer customer = new Customer();
         try {

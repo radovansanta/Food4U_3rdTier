@@ -1,7 +1,9 @@
 package DatabaseAccess;
 
+import Models.Item;
 import Models.Order;
 
+import javax.crypto.CipherInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +19,8 @@ public class ManageOrdersDAO implements ManageOrders {
     public void addOrder(Order order) {
         try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO purchase(address, comment, " +
-                    "customer_username, total_price, date, restaurant_username, delivery_option, status) VALUES (?,?,?,?,?,?,?, ?)");
+                    "customer_username, total_price, date, restaurant_username, delivery_option, status, driver_username) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?)");
             statement.setString(1, order.getAddress());
             statement.setString(2, order.getComment());
             statement.setString(3, order.getCustomerUsername());
@@ -26,6 +29,7 @@ public class ManageOrdersDAO implements ManageOrders {
             statement.setString(6, order.getRestaurantUsername());
             statement.setInt(7, order.getDeliveryID());
             statement.setString(8, "Incoming");
+            statement.setString(9, order.getDriverUsername());
             statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,6 +124,8 @@ public class ManageOrdersDAO implements ManageOrders {
     public void updateOrder(Order order) {
         try (Connection connection = databaseConnection.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE purchase SET status = ? WHERE order_id = ?");
+            if(order.getStatus().equalsIgnoreCase("incoming"))
+                statement.setString(1, "Incoming");
             if (order.getStatus().equalsIgnoreCase("accepted"))
                 statement.setString(1, "Accepted");
             if (order.getStatus().equalsIgnoreCase("declined"))
@@ -130,6 +136,18 @@ public class ManageOrdersDAO implements ManageOrders {
                 statement.setString(1, "Customer pick up");
             if (order.getStatus().equalsIgnoreCase("completed"))
                 statement.setString(1, "Completed");
+            statement.setInt(2, order.getOrderID());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE purchase SET restaurant_username = ? WHERE order_id = ?");
+            statement.setString(1, order.getRestaurantUsername());
+            statement.setInt(2, order.getOrderID());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE purchase SET customer_username = ? WHERE order_id = ?");
+            statement.setString(1, order.getCustomerUsername());
+            statement.setInt(2, order.getOrderID());
+            statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE purchase SET driver_username = ? WHERE order_id = ?");
+            statement.setString(1, order.getDriverUsername());
             statement.setInt(2, order.getOrderID());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -149,6 +167,7 @@ public class ManageOrdersDAO implements ManageOrders {
             String restaurantUsername = resultSet.getString(7);
             int deliveryID = resultSet.getInt(8);
             String status = resultSet.getString(9);
+            String driverUsername = resultSet.getString(10);
             order.setAddress(address);
             order.setComment(comment);
             order.setOrderID(orderID);
@@ -158,6 +177,7 @@ public class ManageOrdersDAO implements ManageOrders {
             order.setRestaurantUsername(restaurantUsername);
             order.setDeliveryID(deliveryID);
             order.setStatus(status);
+            order.setDriverUsername(driverUsername);
         } catch (SQLException e) {
             e.printStackTrace();
         }

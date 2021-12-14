@@ -143,7 +143,9 @@ public class Order {
                 ", status='" + status + '\'' +
                 ", customerUsername='" + customerUsername + '\'' +
                 ", restaurantUsername='" + restaurantUsername + '\'' +
+                ", driverUsername='" + driverUsername + '\'' +
                 ", deliveryID=" + deliveryID +
+                ", items=" + items +
                 '}';
     }
 }
