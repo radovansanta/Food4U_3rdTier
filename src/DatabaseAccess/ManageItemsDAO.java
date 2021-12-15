@@ -97,13 +97,13 @@ public class ManageItemsDAO implements ManageItems {
     }
 
     @Override
-    public void orderItems(ArrayList<Item> items, int orderId) {
+    public void orderItems(Order order) {
         try(Connection connection = databaseConnection.getConnection()){
             PreparedStatement statement = connection.prepareStatement("INSERT INTO ordereditem(order_id, item_id)" +
                     " VALUES (?,?)");
-            for (int i = 0; i < items.size(); i++) {
-                statement.setInt(1, orderId);
-                statement.setInt(2, items.get(i).getItemID());
+            for (int i = 0; i < order.getItems().size(); i++) {
+                statement.setInt(1, order.getOrderID());
+                statement.setInt(2, order.getItems().get(i).getItemID());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {

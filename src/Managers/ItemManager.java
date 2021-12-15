@@ -2,6 +2,7 @@ package Managers;
 
 import DatabaseAccess.ManageItems;
 import Models.Item;
+import Models.Order;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
@@ -57,6 +58,24 @@ public class ItemManager {
             return gson.toJson(manageItems.getItemByItemId(
                     Integer.parseInt(itemId)));
         } catch (JsonSyntaxException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
+    public void orderItems(String orderAsJson) {
+        try {
+            Order order = gson.fromJson(orderAsJson, Order.class);
+            manageItems.orderItems(order);
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getItemsOrdered(String orderId) {
+        try {
+            return gson.toJson(manageItems.getItemsOrdered(Integer.parseInt(orderId)));
+        } catch (JsonSyntaxException e){
             System.out.println(e);
             return null;
         }

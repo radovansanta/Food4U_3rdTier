@@ -351,6 +351,30 @@ public class SocketHandlerManager implements Runnable {
             }
         }
 
+        // Order Item
+        if(request.getType().equals("OrderItems")){
+            System.out.println("I got a request to order items" + request.getContext());
+
+            try{
+                itemManager.orderItems(request.getContext());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        //GetOrderedItems
+        if(request.getType().equals("GetOrderedItems")){
+            System.out.println("I got a request to get ordered items" + request.getContext());
+
+            try{
+                String response = itemManager.getItemsOrdered(request.getContext());
+                byte[] responseAsBytes = response.getBytes();
+                outToClient.write(responseAsBytes, 0, responseAsBytes.length);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         // Delete Item
         if (request.getType().equals("DeleteItem")) {
             System.out.println("I got a request to delete Item" + request.getContext());

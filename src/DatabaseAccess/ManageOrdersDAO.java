@@ -14,7 +14,6 @@ public class ManageOrdersDAO implements ManageOrders {
 
     private DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
 
-    // TODO: 07.12.2021 test
     @Override
     public void addOrder(Order order) {
         try (Connection connection = databaseConnection.getConnection()) {
@@ -36,7 +35,6 @@ public class ManageOrdersDAO implements ManageOrders {
         }
     }
 
-    // TODO: 13.12.2021 test
     @Override
     public Order getOrder(int orderId) {
         Order order = new Order();
@@ -53,7 +51,6 @@ public class ManageOrdersDAO implements ManageOrders {
         return order;
     }
 
-    // TODO: 09.12.2021 test
     @Override
     public ArrayList<Order> getIncomingOrders(String restaurantUsername) {
         ArrayList<Order> orders = new ArrayList<>();
