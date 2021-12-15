@@ -147,6 +147,10 @@ public class ManageOrdersDAO implements ManageOrders {
             statement.setString(1, order.getDriverUsername());
             statement.setInt(2, order.getOrderID());
             statement.executeUpdate();
+            statement = connection.prepareStatement("UPDATE purchase SET total_price = ? WHERE order_id = ?");
+            statement.setDouble(1, order.getPrice());
+            statement.setInt(2, order.getOrderID());
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
