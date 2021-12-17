@@ -23,6 +23,6 @@ public class DatabaseConnection {
 
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?currentSchema=food4u",
-                "postgres", "maria5561");
+                "postgres", "YOUR_POSTGRES_PASSWORD");
     }
 }
